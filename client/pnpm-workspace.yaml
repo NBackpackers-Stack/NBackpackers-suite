@@ -1,0 +1,11 @@
+allowBuilds:
+  lint: false
+  sharp: true
+  unrs-resolver: false
+
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver
+
+onlyBuiltDependencies:
+  - lint
