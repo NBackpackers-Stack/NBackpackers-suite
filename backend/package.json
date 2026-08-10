@@ -1,6 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "packageManager": "pnpm@10.34.5",
   "main": "src/server.ts",
   "scripts": {
     "dev": "tsx watch src/server.ts",
@@ -35,5 +36,12 @@
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.62.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "argon2",
+      "bcrypt",
+      "esbuild"
+    ]
   }
 }

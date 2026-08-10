@@ -2,13 +2,15 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+RUN corepack enable pnpm
 
-RUN npm install
+COPY package*.json pnpm-lock.yaml ./
+
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-RUN npm run build
+RUN pnpm run build
 
 EXPOSE 4000
 
