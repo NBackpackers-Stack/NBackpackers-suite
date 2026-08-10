@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  server:
+    build: ./backend
+    container_name: server
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./backend/.env
+    networks:
+      - backpackers-net
+    restart: unless-stopped
+  client:
+    build: ./client
+    container_name: client
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./client/.env
+    networks:
+      - backpackers-net
+    depends_on:
+      - server
+    restart: unless-stopped
+    
+networks:
+  backpackers-net:
+    driver: bridge
+
+    
