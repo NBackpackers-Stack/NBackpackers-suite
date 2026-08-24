@@ -16,7 +16,7 @@ export default function page() {
           {/* Text Content */}
           <div className="flex-1 space-y-8 z-10 text-center lg:text-left">
             <div className="inline-block px-5 py-2 rounded-full bg-blue-100/80 text-blue-700 font-bold text-sm tracking-widest uppercase shadow-sm border border-blue-200/50 backdrop-blur-sm">
-              Discover The World
+              Discover The World with backpackers
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-tight">
               Embark on your next <br className="hidden lg:block" />
