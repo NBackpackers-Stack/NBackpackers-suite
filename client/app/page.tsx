@@ -16,7 +16,7 @@ export default function page() {
           {/* Text Content */}
           <div className="flex-1 space-y-8 z-10 text-center lg:text-left">
             <div className="inline-block px-5 py-2 rounded-full bg-blue-100/80 text-blue-700 font-bold text-sm tracking-widest uppercase shadow-sm border border-blue-200/50 backdrop-blur-sm">
-              Discover The World with backpackers
+              Discover The World
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-tight">
               Embark on your next <br className="hidden lg:block" />
@@ -76,6 +76,18 @@ export default function page() {
             />
 
             <PortalCard
+              href="/mess"
+              title="Mess"
+              description="Track mess stock levels, manage supplies, and ensure everything runs smoothly in your inventory system."
+              theme="emerald"
+              icon={
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+              }
+            />
+
+            <PortalCard
               href="/manager"
               title="Manager"
               description="Access your secure administrative dashboard to oversee global bookings, manage branches, and view high-level analytics."
@@ -87,17 +99,7 @@ export default function page() {
               }
             />
 
-            <PortalCard
-              href="/mess"
-              title="Inventory"
-              description="Track mess stock levels, manage supplies, and ensure everything runs smoothly in your inventory system."
-              theme="emerald"
-              icon={
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                </svg>
-              }
-            />
+
 
             <PortalCard
               href="/social-media-automation"
