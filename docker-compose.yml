@@ -30,7 +30,7 @@ services:
       - "traefik.http.routers.backpackers-client.rule=Host(`suite.nbackpackers.com`)"
       - "traefik.http.routers.backpackers-client.entrypoints=websecure"
       - "traefik.http.routers.backpackers-client.tls=true"
-      - "traefik.http.routers.backpackers-client.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.backpackers-client.tls.certresolver=mytlschallenge"
       - "traefik.http.services.backpackers-client.loadbalancer.server.port=3000"
     
 networks:
