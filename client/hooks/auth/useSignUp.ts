@@ -1,8 +1,9 @@
-import react, { useState } from "react";
+import { useState } from "react";
 import Signup from "@/services/signup.services";
+import type { SignupFormData } from "@/services/signup.services";
 
 export default function useSignUp() {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<SignupFormData>({
         name: "",
         email: "",
         password: "",
