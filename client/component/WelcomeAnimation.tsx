@@ -17,6 +17,13 @@ export default function WelcomeAnimation() {
   const [quote, setQuote] = useState('');
 
   useEffect(() => {
+    const hasSeenAnimation = sessionStorage.getItem('hasSeenWelcomeAnimation');
+    if (hasSeenAnimation) {
+      setIsHidden(true);
+      return;
+    }
+    sessionStorage.setItem('hasSeenWelcomeAnimation', 'true');
+
     // Pick random quote on client-side to prevent Next.js hydration mismatch
     setQuote(travelQuotes[Math.floor(Math.random() * travelQuotes.length)]);
 
