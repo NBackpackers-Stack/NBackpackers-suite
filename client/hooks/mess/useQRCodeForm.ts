@@ -15,7 +15,7 @@ export interface QRCodeFormData {
   image: File | null;
 }
 
-export const useQRCodeForm = () => {
+export const useQRCodeForm = (messId?: string) => {
   const [formData, setFormData] = useState<QRCodeFormData>({
     message: '',
     name: '',
@@ -72,7 +72,10 @@ export const useQRCodeForm = () => {
 
     setIsSubmitting(true);
     try {
-      const res = await submitFeedback(formData);
+      const res = await submitFeedback({
+        ...formData,
+        messId: messId || '',
+      });
       console.log("QR code Hook", res);
 
       if (res.success) {

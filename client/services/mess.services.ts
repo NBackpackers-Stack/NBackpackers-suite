@@ -2,6 +2,7 @@ import axios from 'axios';
 import { API } from '../constants/api';
 
 export const submitFeedback = async (data: { 
+    messId?: string;
     message: string; 
     name: string;
     number: string;
@@ -19,6 +20,9 @@ export const submitFeedback = async (data: {
 
         // Convert the standard object into FormData for multipart/form-data support
         const formData = new FormData();
+        if (data.messId) {
+            formData.append("messId", data.messId);
+        }
         formData.append("message", data.message);
         formData.append("name", data.name);
         formData.append("number", data.number);
@@ -50,9 +54,10 @@ export const submitFeedback = async (data: {
     }
 };
 
-export const getFeedback = async () => {
+export const getFeedback = async (messId?: string) => {
     try {
-        const response = await axios.get(API.feedback);
+        const url = messId && messId !== 'all' ? `${API.feedback}?messId=${encodeURIComponent(messId)}` : API.feedback;
+        const response = await axios.get(url);
         return response.data;
     } catch (error: any) {
         console.error("Error fetching feedback:", error);

@@ -20,9 +20,9 @@ const consumptionItemSchema = new mongoose.Schema({
 });
 
 const consumptionSchema = new mongoose.Schema({
-    documentId: {
+    messId: {
         type: String,
-        required: [true, "Document ID is required"],
+        required: [true, "Mess ID is required"],
     },
     Breakfast: {
         type: [consumptionItemSchema],

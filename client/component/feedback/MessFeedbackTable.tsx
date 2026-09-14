@@ -20,8 +20,12 @@ const renderStars = (rating: number) => {
   );
 };
 
-export const MessFeedbackTable: React.FC = () => {
-  const { feedbacks, isLoading, error, refetch } = useMessFeedback();
+interface MessFeedbackTableProps {
+  messId?: string;
+}
+
+export const MessFeedbackTable: React.FC<MessFeedbackTableProps> = ({ messId }) => {
+  const { feedbacks, isLoading, error, refetch } = useMessFeedback(messId);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   if (isLoading) {
@@ -91,9 +95,16 @@ export const MessFeedbackTable: React.FC = () => {
               {/* Card Header (Name + Email + Date) */}
               <div className="flex justify-between items-start mb-3 gap-3">
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-gray-900 text-lg leading-tight truncate capitalize">
-                    {item.name || "Anonymous"}
-                  </h3>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="font-bold text-gray-900 text-lg leading-tight truncate capitalize">
+                      {item.name || "Anonymous"}
+                    </h3>
+                    {item.messId && (
+                      <span className="text-[10px] font-semibold tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full uppercase">
+                        {item.messId}
+                      </span>
+                    )}
+                  </div>
                   <p className="text-xs text-gray-500 truncate">{item.email}</p>
                   <p className="text-xs text-gray-500 truncate">Phone: {item.number}</p>
                   {item.batchNumber && (

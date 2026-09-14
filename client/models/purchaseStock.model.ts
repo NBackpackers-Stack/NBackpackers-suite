@@ -5,6 +5,10 @@ const purchaseStockItemSchema = new mongoose.Schema({
         type: String,
         //required: [true, "Item ID is required"],
     },
+    messId: {
+        type: String,
+
+    },
     item: {
         type: String,
         //required: [true, "Item name is required"],

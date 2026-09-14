@@ -3,6 +3,7 @@ import { getFeedback } from '@/services/mess.services';
 
 export interface FeedbackData {
   _id: string;
+  messId?: string;
   name: string;
   number: string;
   batchNumber?: string;
@@ -17,7 +18,7 @@ export interface FeedbackData {
   createdAt: string;
 }
 
-export const useMessFeedback = () => {
+export const useMessFeedback = (messId?: string) => {
   const [feedbacks, setFeedbacks] = useState<FeedbackData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -26,7 +27,7 @@ export const useMessFeedback = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await getFeedback();
+      const response = await getFeedback(messId);
       if (response.success) {
         setFeedbacks(response.data);
       } else {
@@ -41,7 +42,7 @@ export const useMessFeedback = () => {
 
   useEffect(() => {
     fetchFeedbacks();
-  }, []);
+  }, [messId]);
 
   return { feedbacks, isLoading, error, refetch: fetchFeedbacks };
 };

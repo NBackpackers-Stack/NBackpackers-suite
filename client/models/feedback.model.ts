@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const feedbackSchema = new mongoose.Schema({
+    messId: {
+        type: String,
+        required: true,
+        index: true,
+    },
     message: {
         type: String,
         required: true,

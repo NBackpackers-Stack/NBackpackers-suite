@@ -109,7 +109,7 @@ export default function useAddConsumption() {
 
     const handleSubmit = async () => {
         const payload: Record<string, any> = {
-            documentId: inventoryId
+            messId: inventoryId
         };
         mealBlocks.forEach(block => {
             if (block.meal_type) {

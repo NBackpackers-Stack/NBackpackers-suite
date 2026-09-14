@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
         // Parse the incoming multipart/form-data request
         const formData = await req.formData();
 
+        const messId = formData.get("messId") as string;
         const message = formData.get("message") as string;
         const name = formData.get("name") as string;
         const number = formData.get("number") as string;
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest) {
         const ratingOverall = Number(formData.get("ratingOverall"));
         const imageFile = formData.get("image") as File; // This will be the File object if provided
 
-        console.log("Feedback data received:", { message, name, number, email, hasImage: !!imageFile });
+        console.log("Feedback data received:", { messId, message, name, number, email, hasImage: !!imageFile });
 
         //Saving image to coudinary and getting URL
 
@@ -59,6 +60,7 @@ export async function POST(req: NextRequest) {
         }
 
         const createFeedback = await FeedbackModel.create({
+            messId,
             message,
             name,
             number,
@@ -93,9 +95,14 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
     try {
         await dbConnect();
-        
-        // Fetch all feedback sorted by newest first
-        const feedbacks = await FeedbackModel.find().sort({ createdAt: -1 });
+
+        const { searchParams } = new URL(req.url);
+        const messId = searchParams.get("messId");
+
+        const query = messId && messId !== "all" ? { messId } : {};
+
+        // Fetch feedback sorted by newest first
+        const feedbacks = await FeedbackModel.find(query).sort({ createdAt: -1 });
 
         return NextResponse.json(
             {

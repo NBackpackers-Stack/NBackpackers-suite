@@ -20,9 +20,10 @@ export async function POST(req: NextRequest) {
 
         const billImage = stockData.get("image") as File;
 
-        const stockDocumentId = data.documentId;
+        const stockDocumentId = data.messId;
 
         const getStockToBeUpdated = await InventoryModel.findById(stockDocumentId);
+
 
         if (!getStockToBeUpdated) {
             return NextResponse.json(
