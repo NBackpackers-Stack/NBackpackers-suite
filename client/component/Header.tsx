@@ -16,21 +16,6 @@ export default function Header() {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
-
-  if (
-    pathname === '/auth/login' ||
-    pathname === '/auth/signup' ||
-    pathname === '/mess/QRCodeform' ||
-    pathname === '/feedback/PDDU/QR_code_form' ||
-    pathname?.includes('QR_code_form') ||
-    pathname?.includes('QRCodeform')
-  ) {
-    return null;
-  }
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -59,6 +44,21 @@ export default function Header() {
     // Cleanup on unmount
     return () => { document.body.style.overflow = 'unset'; };
   }, [isMenuOpen]);
+
+  if (!mounted) {
+    return null;
+  }
+
+  if (
+    pathname === '/auth/login' ||
+    pathname === '/auth/signup' ||
+    pathname === '/mess/QRCodeform' ||
+    pathname === '/feedback/PDDU/QR_code_form' ||
+    pathname?.includes('QR_code_form') ||
+    pathname?.includes('QRCodeform')
+  ) {
+    return null;
+  }
 
   return (
     <>
