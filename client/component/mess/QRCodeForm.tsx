@@ -25,7 +25,7 @@ export const QRCodeForm: React.FC<QRCodeFormProps> = ({ messId = MESS_ID.mess1 }
   }, [isSuccess]);
 
   return (
-    <div className="relative w-full max-w-lg">
+    <div className="relative w-full max-w-lg mx-auto">
       {/* Background glowing effects for premium look */}
       <div className="absolute top-0 -left-4 w-72 h-72 bg-green-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-pulse"></div>
       <div className="absolute top-0 -right-4 w-72 h-72 bg-emerald-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>

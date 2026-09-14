@@ -6,12 +6,28 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {
+  const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
-  if (pathname === '/auth/login' || pathname === '/auth/signup' || pathname === '/mess/QRCodeform') {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  if (
+    pathname === '/auth/login' ||
+    pathname === '/auth/signup' ||
+    pathname === '/mess/QRCodeform' ||
+    pathname === '/feedback/PDDU/QR_code_form' ||
+    pathname?.includes('QR_code_form') ||
+    pathname?.includes('QRCodeform')
+  ) {
     return null;
   }
 

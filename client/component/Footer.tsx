@@ -1,14 +1,30 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+    const [mounted, setMounted] = useState(false);
     const pathname = usePathname();
 
-    if (pathname === '/auth/login' || pathname === '/auth/signup' || pathname === '/mess/QRCodeform') {
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return null;
+    }
+
+    if (
+        pathname === '/auth/login' ||
+        pathname === '/auth/signup' ||
+        pathname === '/mess/QRCodeform' ||
+        pathname === '/feedback/PDDU/QR_code_form' ||
+        pathname?.includes('QR_code_form') ||
+        pathname?.includes('QRCodeform')
+    ) {
         return null;
     }
 
