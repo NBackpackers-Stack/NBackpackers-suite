@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { MESS_ID } from '@/constants/mess.constants';
+import { createInventory } from '@/services/inventory.services';
 
 interface MessBranch {
     id: string;
@@ -16,13 +17,13 @@ const MessDashboardPage = () => {
 
     const branches: MessBranch[] = [
         {
-            id: MESS_ID.mess1,
+            id: "6a4fe5ee25faa16a764e7b2b",
             name: "ITS",
             description: "Active Mess Dashboard & Operations",
             status: "Active"
         },
         {
-            id: MESS_ID.mess2,
+            id: "6aaa853e761f293372e69228",
             name: "PDDU",
             description: "Active Mess Dashboard & Operations",
             status: "Active"
@@ -152,7 +153,20 @@ const MessDashboardPage = () => {
 
                 {/* Top Actions: Add Mess */}
                 <div className="flex justify-center mb-12">
-                    <button className="group relative overflow-hidden bg-white rounded-2xl p-6 shadow-md border border-gray-200 transition-all hover:shadow-xl hover:-translate-y-1 flex items-center gap-4 w-full max-w-md">
+                    <button
+                        onClick={async () => {
+                            try {
+                                alert("Creating inventory...");
+                                const res = await createInventory();
+                                alert("Inventory created successfully!");
+                                console.log(res);
+                            } catch (e) {
+                                alert("Failed to create inventory. Check console.");
+                                console.error(e);
+                            }
+                        }}
+                        className="group relative overflow-hidden bg-white rounded-2xl p-6 shadow-md border border-gray-200 transition-all hover:shadow-xl hover:-translate-y-1 flex items-center gap-4 w-full max-w-md"
+                    >
                         <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 group-hover:bg-orange-500 group-hover:text-white transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />

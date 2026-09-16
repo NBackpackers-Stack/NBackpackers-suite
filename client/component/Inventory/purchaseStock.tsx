@@ -4,7 +4,7 @@ import React from 'react';
 import usePurchaseStock from '@/hooks/inventory/usePurchaseStock';
 import AnimatedLoader from '@/component/AnimatedLoader';
 
-export default function PurchaseStock() {
+export default function PurchaseStock({ messId }: { messId: string }) {
   const {
     items,
     error,
@@ -17,7 +17,7 @@ export default function PurchaseStock() {
     image,
     setImage,
     handleSubmit
-  } = usePurchaseStock();
+  } = usePurchaseStock(messId);
 
   if (error) return <div className="p-6 text-center text-red-500 font-semibold bg-red-50 rounded-lg max-w-lg mx-auto mt-10 shadow-sm border border-red-100">Error: {error}</div>;
 

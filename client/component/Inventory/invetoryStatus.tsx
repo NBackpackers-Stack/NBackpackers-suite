@@ -5,9 +5,9 @@ import useInventory from '@/hooks/inventory/useInventory';
 import InventoryTable from '@/component/Inventory/InventoryTable';
 import AnimatedLoader from '@/component/AnimatedLoader';
 
-const InventoryStatusPage = () => {
+const InventoryStatusPage = ({ messId }: { messId: string }) => {
 
-    const { items, isLoading, error, id } = useInventory();
+    const { items, isLoading, error, id } = useInventory(messId);
 
     const [searchQuery, setSearchQuery] = useState<string>('');
 

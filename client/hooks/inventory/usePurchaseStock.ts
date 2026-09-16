@@ -15,7 +15,7 @@ interface PurchaseRow {
     unit: string;
 }
 
-export default function usePurchaseStock() {
+export default function usePurchaseStock(initialMessId: string) {
     const [items, setItems] = useState<InventoryItem[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -25,7 +25,7 @@ export default function usePurchaseStock() {
     ]);
     const [image, setImage] = useState<File | null>(null);
 
-    const [inventoryId, setInventoryId] = useState<string>("6a4fe5ee25faa16a764e7b2b");
+    const [inventoryId, setInventoryId] = useState<string>(initialMessId || "6a4fe5ee25faa16a764e7b2b");
 
     useEffect(() => {
         const fetchInventory = async () => {

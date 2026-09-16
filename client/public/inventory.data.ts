@@ -1,5 +1,5 @@
 export const defaultInventoryItems = {
-  messName: "ITS Greater Noida",
+  messName: "PDDU Greater Noida",
 
   items: [
     { item_id: "ITM01", item_name: "Achari Masala", current_stock: 2, unit: "kg" },

@@ -12,13 +12,13 @@ interface InventoryItem {
     last_updated: string;
 }
 
-export default function useInventory() {
+export default function useInventory(initialMessId: string) {
     const [items, setItems] = useState<InventoryItem[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
 
-    const id = "6a4fe5ee25faa16a764e7b2b";
+    const id = initialMessId || "6a4fe5ee25faa16a764e7b2b";
 
     useEffect(() => {
         const fetchInventory = async () => {

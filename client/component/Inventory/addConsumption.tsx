@@ -18,7 +18,7 @@ interface ConsumptionRow {
 }
 import AnimatedLoader from '@/component/AnimatedLoader';
 
-export default function AddConsumption() {
+export default function AddConsumption({ messId }: { messId: string }) {
 
   const {
     items,
@@ -35,7 +35,7 @@ export default function AddConsumption() {
     image,
     setImage,
     handleSubmit
-  } = useAddConsumption()
+  } = useAddConsumption(messId)
 
   if (error) return <div className="p-6 text-center text-red-500">Error: {error}</div>;
 
