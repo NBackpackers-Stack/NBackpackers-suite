@@ -98,11 +98,13 @@ export async function GET(req: NextRequest) {
 
         const { searchParams } = new URL(req.url);
         const messId = searchParams.get("messId");
-
-        const query = messId && messId !== "all" ? { messId } : {};
-
+        console.log("messId----", messId);
+        //const query = messId && messId !== "all" ? { messId } : {};
+        const query = { messId };
         // Fetch feedback sorted by newest first
         const feedbacks = await FeedbackModel.find(query).sort({ createdAt: -1 });
+
+        console.log("feedbacks----", feedbacks, query);
 
         return NextResponse.json(
             {

@@ -4,13 +4,13 @@ import React, { useEffect } from 'react';
 import Image from 'next/image';
 import confetti from 'canvas-confetti';
 import { useQRCodeForm } from '@/hooks/mess/useQRCodeForm';
-import { MESS_ID } from '@/constants/mess.constants';
 
 interface QRCodeFormProps {
-  messId?: string;
+  messId: string;
 }
 
-export const QRCodeForm: React.FC<QRCodeFormProps> = ({ messId = MESS_ID.mess1 }) => {
+export const QRCodeForm: React.FC<QRCodeFormProps> = ({ messId }) => {
+  console.log("QR feed compeonet", typeof messId, messId);
   const { formData, isSubmitting, isSuccess, handleTextChange, handleRatingChange, handleImageChange, handleSubmit, closeSuccessModal } = useQRCodeForm(messId);
 
   useEffect(() => {

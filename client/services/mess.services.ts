@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { API } from '../constants/api';
 
-export const submitFeedback = async (data: { 
+export const submitFeedback = async (data: {
     messId?: string;
-    message: string; 
+    message: string;
     name: string;
     number: string;
     batchNumber?: string;
@@ -13,7 +13,7 @@ export const submitFeedback = async (data: {
     ratingQuality: number;
     ratingPortion: number;
     ratingOverall: number;
-    image?: File | string | null 
+    image?: File | string | null
 }) => {
     try {
         console.log("arrived in the QR code services", data);
@@ -56,7 +56,11 @@ export const submitFeedback = async (data: {
 
 export const getFeedback = async (messId?: string) => {
     try {
-        const url = messId && messId !== 'all' ? `${API.feedback}?messId=${encodeURIComponent(messId)}` : API.feedback;
+        console.log("mess", messId);
+
+        //const url = messId && messId !== 'all' ? `${API.feedback}?messId=${encodeURIComponent(messId)}` : API.feedback;
+        const url = `${API.feedback}?messId=${messId}`;
+        console.log("url----", url);
         const response = await axios.get(url);
         return response.data;
     } catch (error: any) {

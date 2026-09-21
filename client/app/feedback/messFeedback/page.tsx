@@ -55,7 +55,7 @@ export default function MessFeedbackPage() {
 
         {/* Main Content Area */}
         <div className="relative z-10">
-          <MessFeedbackTable />
+          <MessFeedbackTable messId="ITS-GN" />
         </div>
       </div>
     </div>

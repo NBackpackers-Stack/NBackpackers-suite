@@ -8,9 +8,9 @@ const renderStars = (rating: number) => {
   return (
     <div className="flex">
       {[1, 2, 3, 4, 5].map((star) => (
-        <svg 
-          key={star} 
-          className={`w-3.5 h-3.5 ${star <= (rating || 0) ? 'text-yellow-400 drop-shadow-sm' : 'text-gray-200'}`} 
+        <svg
+          key={star}
+          className={`w-3.5 h-3.5 ${star <= (rating || 0) ? 'text-yellow-400 drop-shadow-sm' : 'text-gray-200'}`}
           fill="currentColor" viewBox="0 0 20 20"
         >
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -27,6 +27,9 @@ interface MessFeedbackTableProps {
 export const MessFeedbackTable: React.FC<MessFeedbackTableProps> = ({ messId }) => {
   const { feedbacks, isLoading, error, refetch } = useMessFeedback(messId);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  console.log("feedback data", typeof messId, messId);
+
 
   if (isLoading) {
     return (
@@ -67,7 +70,7 @@ export const MessFeedbackTable: React.FC<MessFeedbackTableProps> = ({ messId }) 
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6 px-2">
         <h2 className="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Recent Responses</h2>
-        <button 
+        <button
           onClick={refetch}
           className="p-2 md:px-4 md:py-2 bg-white text-blue-600 hover:bg-blue-50 border border-gray-200 rounded-xl shadow-sm text-sm font-semibold transition-all active:scale-95 flex items-center gap-2"
           aria-label="Refresh feedback"
@@ -87,8 +90,8 @@ export const MessFeedbackTable: React.FC<MessFeedbackTableProps> = ({ messId }) 
           </div>
         ) : (
           feedbacks.map((item, index) => (
-            <div 
-              key={item._id} 
+            <div
+              key={item._id}
               className="bg-white border border-gray-100/80 rounded-3xl p-5 md:p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] transition-all duration-300 transform hover:-translate-y-1 animate-fade-in-up flex flex-col h-full"
               style={{ animationDelay: `${index * 80}ms` }}
             >
@@ -123,30 +126,30 @@ export const MessFeedbackTable: React.FC<MessFeedbackTableProps> = ({ messId }) 
 
               {/* Ratings Summary Grid */}
               <div className="bg-slate-50/80 rounded-xl p-3 mb-4 border border-slate-100 shadow-inner">
-                 <div className="grid grid-cols-2 gap-y-2.5 gap-x-3 text-xs">
-                    <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
-                       <span className="text-slate-600 font-medium">Taste</span>
-                       {renderStars(item.ratingTaste)}
+                <div className="grid grid-cols-2 gap-y-2.5 gap-x-3 text-xs">
+                  <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
+                    <span className="text-slate-600 font-medium">Taste</span>
+                    {renderStars(item.ratingTaste)}
+                  </div>
+                  <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
+                    <span className="text-slate-600 font-medium">Freshness</span>
+                    {renderStars(item.ratingFreshness)}
+                  </div>
+                  <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
+                    <span className="text-slate-600 font-medium">Quality</span>
+                    {renderStars(item.ratingQuality)}
+                  </div>
+                  <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
+                    <span className="text-slate-600 font-medium">Portion</span>
+                    {renderStars(item.ratingPortion)}
+                  </div>
+                  <div className="col-span-2 flex justify-between items-center mt-1 pt-2.5 border-t border-slate-200">
+                    <span className="text-slate-800 font-bold text-sm">Overall Satisfaction</span>
+                    <div className="scale-125 origin-right">
+                      {renderStars(item.ratingOverall)}
                     </div>
-                    <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
-                       <span className="text-slate-600 font-medium">Freshness</span>
-                       {renderStars(item.ratingFreshness)}
-                    </div>
-                    <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
-                       <span className="text-slate-600 font-medium">Quality</span>
-                       {renderStars(item.ratingQuality)}
-                    </div>
-                    <div className="flex justify-between items-center bg-white px-2 py-1 rounded-md shadow-sm border border-slate-100">
-                       <span className="text-slate-600 font-medium">Portion</span>
-                       {renderStars(item.ratingPortion)}
-                    </div>
-                    <div className="col-span-2 flex justify-between items-center mt-1 pt-2.5 border-t border-slate-200">
-                       <span className="text-slate-800 font-bold text-sm">Overall Satisfaction</span>
-                       <div className="scale-125 origin-right">
-                         {renderStars(item.ratingOverall)}
-                       </div>
-                    </div>
-                 </div>
+                  </div>
+                </div>
               </div>
 
               {/* Card Body (Message) */}
@@ -160,7 +163,7 @@ export const MessFeedbackTable: React.FC<MessFeedbackTableProps> = ({ messId }) 
               {/* Card Footer (Actions) */}
               <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
                 {item.image ? (
-                  <button 
+                  <button
                     onClick={() => setSelectedImage(item.image!)}
                     className="w-full bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 text-blue-700 py-2.5 px-4 rounded-xl text-sm font-bold transition-all active:scale-95 flex items-center justify-center gap-2 group"
                   >
@@ -181,27 +184,27 @@ export const MessFeedbackTable: React.FC<MessFeedbackTableProps> = ({ messId }) 
 
       {/* Image Modal */}
       {selectedImage && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/90 backdrop-blur-md transition-opacity" 
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/90 backdrop-blur-md transition-opacity"
           onClick={() => setSelectedImage(null)}
         >
-          <div 
-            className="relative w-full max-w-lg bg-black rounded-3xl overflow-hidden shadow-2xl animate-fade-in-up flex flex-col items-center justify-center" 
+          <div
+            className="relative w-full max-w-lg bg-black rounded-3xl overflow-hidden shadow-2xl animate-fade-in-up flex flex-col items-center justify-center"
             onClick={e => e.stopPropagation()}
           >
             {/* Modal Close Button */}
-            <button 
+            <button
               onClick={() => setSelectedImage(null)}
               className="absolute top-3 right-3 bg-white/20 hover:bg-white/40 backdrop-blur-md text-white rounded-full p-2.5 transition-all active:scale-90 z-10"
               aria-label="Close image"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            
+
             <div className="relative w-full min-h-[40vh] max-h-[80vh] flex items-center justify-center">
-              <Image 
-                src={selectedImage} 
-                alt="Feedback Attachment" 
+              <Image
+                src={selectedImage}
+                alt="Feedback Attachment"
                 layout="fill"
                 objectFit="contain"
                 className="rounded-xl"
