@@ -1,10 +1,24 @@
 'use client';
 
-import React from 'react';
+
+import React, { Suspense } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { MessFeedbackTable } from '@/component/feedback/MessFeedbackTable';
+import { useSearchParams } from 'next/navigation';
 
-export default function MessFeedbackPage() {
+function MessFeedbackContent() {
+  const searchParams = useSearchParams();
+
+  const messId = searchParams.get('messId');
+
+  const feddbaackMessId =
+    messId === "6ab17fbf741a95381896eed3"
+      ? "PDDU-GN"
+      : messId === "6a4fe5ee25faa16a764e7b2b"
+        ? "ITS-GN"
+        : "";
+
   return (
     <div className="min-h-screen bg-slate-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Ambient Background Blur Elements */}
@@ -23,7 +37,7 @@ export default function MessFeedbackPage() {
             Back to Dashboard
           </Link>
 
-          <Link href="/feedback/feedbackDashboard" className="inline-flex items-center gap-2 text-sm font-extrabold text-white bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 transition-all px-5 py-2.5 rounded-full shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 active:scale-95">
+          <Link href={`/feedback/feedbackDashboard/${messId}`} className="inline-flex items-center gap-2 text-sm font-extrabold text-white bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 transition-all px-5 py-2.5 rounded-full shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 active:scale-95">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
@@ -55,9 +69,17 @@ export default function MessFeedbackPage() {
 
         {/* Main Content Area */}
         <div className="relative z-10">
-          <MessFeedbackTable messId="ITS-GN" />
+          <MessFeedbackTable messId={feddbaackMessId} />
         </div>
       </div>
     </div>
+  );
+}
+
+export default function MessFeedbackPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-50 flex items-center justify-center text-gray-500">Loading...</div>}>
+      <MessFeedbackContent />
+    </Suspense>
   );
 }
