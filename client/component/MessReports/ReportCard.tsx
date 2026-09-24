@@ -36,7 +36,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ record, activeTab, onIma
                     </div>
                     <div>
                         <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5 block">Recorded On</span>
-                        <h3 className="text-base md:text-lg font-extrabold text-slate-800 leading-none">
+                        <h3 className="text-base md:text-lg font-extrabold text-slate-800 leading-none" suppressHydrationWarning>
                             {formatDate(record.createdAt || record.date)}
                         </h3>
                     </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { messReportsService } from '@/services/messReports.service';
 
-export const useMessReports = () => {
+export const useMessReports = (messId?: string) => {
     const [activeTab, setActiveTab] = useState<'consumption' | 'purchase'>('consumption');
     const [data, setData] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +16,7 @@ export const useMessReports = () => {
             const finalDate = customDate !== undefined ? customDate : dateFilter;
             const finalItem = customItem !== undefined ? customItem : itemFilter;
             
-            const responseData = await messReportsService.fetchReports(activeTab, finalDate, finalItem);
+            const responseData = await messReportsService.fetchReports(activeTab, finalDate, finalItem, messId);
             if (responseData.success) {
                 setData(responseData.data);
             }
@@ -25,13 +25,13 @@ export const useMessReports = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [activeTab, dateFilter, itemFilter]);
+    }, [activeTab, dateFilter, itemFilter, messId]);
 
     useEffect(() => {
-        fetchReports('', ''); // Reset filters on tab change
+        fetchReports('', ''); // Reset filters on tab or mess change
         setDateFilter('');
         setItemFilter('');
-    }, [activeTab]); // only trigger on tab change
+    }, [activeTab, messId]); // trigger on tab change or messId change
 
     const handleClearFilters = () => {
         setDateFilter('');

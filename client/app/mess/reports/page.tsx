@@ -1,14 +1,22 @@
 "use client";
-import React from 'react';
-import { useRouter } from 'next/navigation';
+import React, { Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import AnimatedLoader from '@/component/AnimatedLoader';
 import { useMessReports } from '@/hooks/useMessReports';
 import { ReportCard } from '@/component/MessReports/ReportCard';
 import { FullscreenImageModal } from '@/component/MessReports/FullscreenImageModal';
 import { FilterBar } from '@/component/MessReports/FilterBar';
 
-export default function ReportsPage() {
+function ReportsContent() {
+    const [mounted, setMounted] = React.useState(false);
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const messId = searchParams.get('messId') || '';
+
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const {
         activeTab,
         setActiveTab,
@@ -22,13 +30,21 @@ export default function ReportsPage() {
         setItemFilter,
         fetchReports,
         handleClearFilters
-    } = useMessReports();
+    } = useMessReports(messId);
+
+    if (!mounted) {
+        return (
+            <div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-500 font-semibold">
+                Loading reports...
+            </div>
+        );
+    }
 
     return (
-        <>
+        <div className="relative">
             {isLoading && <AnimatedLoader />}
             <div className={`min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 font-sans text-slate-800 pb-20 ${isLoading ? 'blur-sm pointer-events-none' : ''}`}>
-                
+
                 {/* Header with glassmorphism */}
                 <div className="bg-white/80 backdrop-blur-xl px-4 md:px-6 pt-6 md:pt-10 pb-4 shadow-sm border-b border-white sticky top-0 z-30">
                     <div className="flex items-center gap-3 mb-4">
@@ -46,15 +62,15 @@ export default function ReportsPage() {
 
                     {/* Animated Tabs */}
                     <div className="flex p-1 bg-slate-200/50 rounded-xl relative shadow-inner max-w-sm">
-                        <div 
+                        <div
                             className={`absolute inset-y-1 w-[calc(50%-4px)] bg-white rounded-lg shadow-sm transition-all duration-300 ease-out ${activeTab === 'consumption' ? 'left-1' : 'left-[calc(50%+2px)]'}`}
                         ></div>
-                        
+
                         <button
                             onClick={() => setActiveTab('consumption')}
                             className={`flex-1 py-2 text-xs md:text-sm font-bold rounded-lg transition-colors relative z-10 ${activeTab === 'consumption'
-                                    ? 'text-indigo-600'
-                                    : 'text-slate-500 hover:text-slate-700'
+                                ? 'text-indigo-600'
+                                : 'text-slate-500 hover:text-slate-700'
                                 }`}
                         >
                             Consumption
@@ -62,8 +78,8 @@ export default function ReportsPage() {
                         <button
                             onClick={() => setActiveTab('purchase')}
                             className={`flex-1 py-2 text-xs md:text-sm font-bold rounded-lg transition-colors relative z-10 ${activeTab === 'purchase'
-                                    ? 'text-emerald-600'
-                                    : 'text-slate-500 hover:text-slate-700'
+                                ? 'text-emerald-600'
+                                : 'text-slate-500 hover:text-slate-700'
                                 }`}
                         >
                             Purchases
@@ -73,8 +89,8 @@ export default function ReportsPage() {
 
                 {/* Content List */}
                 <div className="p-3 md:p-6 max-w-3xl mx-auto space-y-4">
-                    
-                    <FilterBar 
+
+                    <FilterBar
                         dateFilter={dateFilter}
                         setDateFilter={setDateFilter}
                         itemFilter={itemFilter}
@@ -94,7 +110,7 @@ export default function ReportsPage() {
                     ) : (
                         <div className="flex flex-col gap-6 mt-2">
                             {data.map((record, index) => (
-                                <ReportCard 
+                                <ReportCard
                                     key={record._id || index}
                                     record={record}
                                     activeTab={activeTab}
@@ -106,10 +122,18 @@ export default function ReportsPage() {
                 </div>
             </div>
 
-            <FullscreenImageModal 
-                imageUrl={fullscreenImage} 
-                onClose={() => setFullscreenImage(null)} 
+            <FullscreenImageModal
+                imageUrl={fullscreenImage}
+                onClose={() => setFullscreenImage(null)}
             />
-        </>
+        </div>
+    );
+}
+
+export default function ReportsPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-500 font-semibold">Loading reports...</div>}>
+            <ReportsContent />
+        </Suspense>
     );
 }
