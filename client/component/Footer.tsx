@@ -92,7 +92,10 @@ export default function Footer() {
                         <ul className="space-y-4">
                             {['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Contact Us'].map((item) => (
                                 <li key={item}>
-                                    <Link href="#" className="text-slate-500 hover:text-blue-600 font-medium transition-colors">
+                                    <Link
+                                        href={item === 'Privacy Policy' ? '/privacy-policy' : '#'}
+                                        className="text-slate-500 hover:text-blue-600 font-medium transition-colors"
+                                    >
                                         {item}
                                     </Link>
                                 </li>
@@ -108,7 +111,7 @@ export default function Footer() {
                         © {new Date().getFullYear()} Backpackers. All rights reserved.
                     </p>
                     <div className="flex gap-8 text-sm font-medium">
-                        <Link href="#" className="text-slate-400 hover:text-slate-600 transition-colors">Privacy</Link>
+                        <Link href="/privacy-policy" className="text-slate-400 hover:text-slate-600 transition-colors">Privacy</Link>
                         <Link href="#" className="text-slate-400 hover:text-slate-600 transition-colors">Terms</Link>
                         <Link href="#" className="text-slate-400 hover:text-slate-600 transition-colors">Sitemap</Link>
                     </div>
