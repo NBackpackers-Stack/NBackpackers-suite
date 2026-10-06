@@ -2,9 +2,21 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { FeedbackDashboard } from '@/component/feedback/FeedbackDashboard';
 
 export default function FeedbackDashboardPage() {
+  const params = useParams();
+  const messId = params?.id;
+
+  const feddbaackMessId =
+    messId === "6ab17fbf741a95381896eed3"
+      ? "PDDU-GN"
+      : messId === "6a4fe5ee25faa16a764e7b2b"
+        ? "ITS-GN"
+        : "";
+
+
   return (
     <div className="min-h-screen bg-slate-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Ambient Background Blur Elements */}
@@ -16,7 +28,7 @@ export default function FeedbackDashboardPage() {
         {/* Navigation / Back Button */}
         <div className="mb-6 flex items-center justify-between">
           <Link
-            href="/feedback/messFeedback"
+            href={messId ? `/feedback/messFeedback?messId=${messId}` : "/feedback/messFeedback"}
             className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-all bg-white/80 backdrop-blur-md px-5 py-2.5 rounded-full shadow-sm border border-slate-200/60 hover:shadow-md hover:-translate-y-0.5"
           >
             <svg
@@ -61,7 +73,7 @@ export default function FeedbackDashboardPage() {
 
         {/* Dashboard Main Component */}
         <div className="relative z-10">
-          <FeedbackDashboard />
+          <FeedbackDashboard messId={feddbaackMessId as string} />
         </div>
       </div>
     </div>

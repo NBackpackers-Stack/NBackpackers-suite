@@ -28,8 +28,8 @@ const renderStars = (rating: number) => {
   );
 };
 
-export const FeedbackDashboard: React.FC = () => {
-  const { feedbacks, isLoading, error, refetch } = useMessFeedback();
+export const FeedbackDashboard: React.FC<{ messId: string }> = ({ messId }) => {
+  const { feedbacks, isLoading, error, refetch } = useMessFeedback(messId);
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'positive' | 'neutral' | 'negative'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -306,11 +306,10 @@ export const FeedbackDashboard: React.FC = () => {
                   <button
                     key={tf.value}
                     onClick={() => setDaysRange(tf.value)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      daysRange === tf.value
-                        ? 'bg-white text-indigo-600 shadow-sm'
-                        : 'text-slate-500 hover:text-slate-800'
-                    }`}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${daysRange === tf.value
+                      ? 'bg-white text-indigo-600 shadow-sm'
+                      : 'text-slate-500 hover:text-slate-800'
+                      }`}
                   >
                     {tf.label}
                   </button>
@@ -567,33 +566,29 @@ export const FeedbackDashboard: React.FC = () => {
             <div className="flex items-center bg-slate-100 p-1 rounded-2xl gap-1">
               <button
                 onClick={() => setSelectedFilter('all')}
-                className={`px-3 py-2 rounded-xl text-xs font-extrabold transition-all ${
-                  selectedFilter === 'all' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'
-                }`}
+                className={`px-3 py-2 rounded-xl text-xs font-extrabold transition-all ${selectedFilter === 'all' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                  }`}
               >
                 All ({stats.total})
               </button>
               <button
                 onClick={() => setSelectedFilter('positive')}
-                className={`px-3 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
-                  selectedFilter === 'positive' ? 'bg-emerald-500 text-white shadow-md' : 'text-emerald-600 hover:bg-emerald-50'
-                }`}
+                className={`px-3 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${selectedFilter === 'positive' ? 'bg-emerald-500 text-white shadow-md' : 'text-emerald-600 hover:bg-emerald-50'
+                  }`}
               >
                 Positive ({stats.positive})
               </button>
               <button
                 onClick={() => setSelectedFilter('neutral')}
-                className={`px-3 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
-                  selectedFilter === 'neutral' ? 'bg-amber-400 text-slate-900 shadow-md' : 'text-amber-600 hover:bg-amber-50'
-                }`}
+                className={`px-3 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${selectedFilter === 'neutral' ? 'bg-amber-400 text-slate-900 shadow-md' : 'text-amber-600 hover:bg-amber-50'
+                  }`}
               >
                 Neutral ({stats.neutral})
               </button>
               <button
                 onClick={() => setSelectedFilter('negative')}
-                className={`px-3 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${
-                  selectedFilter === 'negative' ? 'bg-rose-500 text-white shadow-md' : 'text-rose-600 hover:bg-rose-50'
-                }`}
+                className={`px-3 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1 ${selectedFilter === 'negative' ? 'bg-rose-500 text-white shadow-md' : 'text-rose-600 hover:bg-rose-50'
+                  }`}
               >
                 Negative ({stats.negative})
               </button>
