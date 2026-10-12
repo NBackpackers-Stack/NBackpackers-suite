@@ -28,615 +28,565 @@ export const templatesById: Record<string, TripTemplate> = {
     goa: {
         tripName: "Goa getaway",
         tripDate: "2026-03-13",
-        tripDiscussion: "This is a two-day sample trip to Goa.",groups: [
+        tripDiscussion: "This is a two-day sample trip to Goa.",
+groups: [
   {
     groupId: generateId(),
-    date: "DAY 01 – DEPARTURE FROM BHOPAL",
+    date: "26 September 2026",
     tasks: [
-      {
-        id: generateId(),
-        name: "Coordinator Reporting & Setup",
-        description: "Report at Rani Kamlapati (Bhopal) Junction and prepare attendance and travel arrangements",
-        time: "18:00"
-      },
       {
         id: generateId(),
         name: "Student Reporting & Attendance",
-        description: "Verify student reporting and complete the initial headcount",
-        time: "18:00"
+        description: "All students report at Bhopal Junction and attendance is completed.",
+        time: "15:30"
       },
       {
         id: generateId(),
-        name: "Counting, Grouping & Briefing",
-        description: "Group students and brief them about safety, discipline and train journey instructions",
-        time: "18:30"
+        name: "Group Formation & Luggage Check",
+        description: "Organize students into groups and identify their luggage.",
+        time: "15:40"
       },
       {
         id: generateId(),
-        name: "Train Details Verification",
-        description: "Verify train number, coach details and student seating arrangements",
-        time: "18:30"
+        name: "Journey Briefing",
+        description: "Brief students about the train journey, discipline and safety instructions.",
+        time: "16:00"
       },
       {
         id: generateId(),
-        name: "Final Headcount",
-        description: "Complete final student and staff headcount before boarding",
-        time: "19:30"
+        name: "Train Boarding Headcount",
+        description: "Complete headcount before boarding Train No. 19712 BPL KWP Express.",
+        time: "16:15"
       },
       {
         id: generateId(),
-        name: "Train Boarding Coordination",
-        description: "Coordinate boarding on Train No. 11464 – Somnath Express and ensure students are seated properly",
-        time: "19:45"
-      },
-      {
-        id: generateId(),
-        name: "Dinner Coordination",
-        description: "Ensure students have dinner brought from home and manage dinner during the train journey",
-        time: "20:30"
-      },
-      {
-        id: generateId(),
-        name: "Teacher Welfare Check",
-        description: "Check teacher dinner arrangements and requirements",
-        time: "20:50"
-      },
-      {
-        id: generateId(),
-        name: "Night Discipline Check",
-        description: "Check student wellbeing and ensure discipline during the overnight train journey",
-        time: "22:00"
-      },
-      {
-        id: generateId(),
-        name: "Overnight Journey Monitoring",
-        description: "Maintain student safety and discipline throughout the overnight train journey",
-        time: "23:00"
-      }
-    ]
-  },
-
-  {
-    groupId: generateId(),
-    date: "DAY 02 – ARRIVAL AT VERAVAL & SOMNATH",
-    tasks: [
-      {
-        id: generateId(),
-        name: "Arrival at Veraval Railway Station",
-        description: "Coordinate safe deboarding and verify complete student headcount",
-        time: "17:25"
-      },
-      {
-        id: generateId(),
-        name: "Luggage Collection",
-        description: "Ensure all student luggage is collected from the train",
-        time: "17:30"
-      },
-      {
-        id: generateId(),
-        name: "Bus Boarding Coordination",
-        description: "Coordinate boarding into AC bus for transfer towards Somnath",
-        time: "17:45"
-      },
-      {
-        id: generateId(),
-        name: "Transfer to Somnath",
-        description: "Monitor safe transfer from Veraval to Somnath",
-        time: "17:45"
-      },
-      {
-        id: generateId(),
-        name: "Hotel Check-In",
-        description: "Coordinate hotel check-in and assign quad-sharing rooms",
-        time: "18:00"
-      },
-      {
-        id: generateId(),
-        name: "Room Allotment",
-        description: "Distribute rooms according to the approved rooming list",
-        time: "18:00"
-      },
-      {
-        id: generateId(),
-        name: "Freshen-Up Coordination",
-        description: "Ensure students settle into rooms and freshen up before the temple visit",
-        time: "18:10"
-      },
-      {
-        id: generateId(),
-        name: "Somnath Temple Briefing",
-        description: "Give temple visit, safety and discipline instructions",
-        time: "18:20"
-      },
-      {
-        id: generateId(),
-        name: "Somnath Temple Headcount",
-        description: "Verify all students and staff before entering the temple",
-        time: "18:25"
-      },
-      {
-        id: generateId(),
-        name: "Somnath Temple – Jyotirlinga Darshan",
-        description: "Coordinate spiritual experience and temple visit while maintaining group discipline",
-        time: "18:30"
+        name: "Board Train from Bhopal",
+        description: "Board Train No. 19712 BPL KWP Express for Chittorgarh.",
+        time: "16:30"
       },
       {
         id: generateId(),
         name: "Dinner Coordination",
-        description: "Coordinate dinner service at the hotel",
-        time: "20:30"
+        description: "Ensure students have their dinner brought along for the overnight journey.",
+        time: "20:00"
       },
       {
         id: generateId(),
         name: "Teacher Welfare Check",
-        description: "Check teacher dinner arrangements and requirements",
-        time: "20:50"
+        description: "Check on teachers after dinner.",
+        time: "20:30"
       },
       {
         id: generateId(),
         name: "Night Discipline Check",
-        description: "Check rooms, student wellbeing and ensure proper night discipline",
+        description: "Check student attendance, discipline and safety during the overnight train journey.",
         time: "22:00"
       }
     ]
   },
-
   {
     groupId: generateId(),
-    date: "DAY 03 – SOMNATH TO SASAN GIR & SAFARI",
+    date: "27 September 2026",
     tasks: [
       {
         id: generateId(),
-        name: "Wake-Up Coordination",
-        description: "Wake students and ensure readiness for the day's transfer",
-        time: "07:00"
+        name: "Arrival at Chittorgarh Station",
+        description: "Arrive at Chittorgarh Railway Station.",
+        time: "02:30"
+      },
+      {
+        id: generateId(),
+        name: "Chittorgarh Arrival Headcount",
+        description: "Complete headcount after arriving at Chittorgarh Station.",
+        time: "02:35"
+      },
+      {
+        id: generateId(),
+        name: "AC Coach Transfer Briefing",
+        description: "Brief students about the transfer to Udaipur and travel discipline.",
+        time: "02:40"
+      },
+      {
+        id: generateId(),
+        name: "Transfer Headcount",
+        description: "Complete headcount before boarding the AC coach.",
+        time: "02:45"
+      },
+      {
+        id: generateId(),
+        name: "Transfer to Udaipur",
+        description: "Travel by AC coach from Chittorgarh to Udaipur.",
+        time: "03:00"
+      },
+      {
+        id: generateId(),
+        name: "Arrival at Hotel Shakti Villas",
+        description: "Arrive at Hotel Shakti Villas, Udaipur.",
+        time: "06:00"
+      },
+      {
+        id: generateId(),
+        name: "Hotel Check-in & Room Allocation",
+        description: "Complete hotel check-in and allocate quad-sharing rooms.",
+        time: "06:15"
       },
       {
         id: generateId(),
         name: "Breakfast Coordination",
-        description: "Coordinate breakfast service at the hotel",
-        time: "07:30"
+        description: "Coordinate breakfast at the hotel.",
+        time: "07:00"
       },
       {
         id: generateId(),
         name: "Teacher Welfare Check",
-        description: "Check teacher breakfast arrangements and requirements",
-        time: "07:50"
+        description: "Check on teachers after breakfast.",
+        time: "07:20"
       },
       {
         id: generateId(),
-        name: "Hotel Checkout",
-        description: "Coordinate room clearance and hotel checkout",
-        time: "09:00"
+        name: "Swimming Session Briefing",
+        description: "Brief students about swimming pool rules, safety and supervision.",
+        time: "07:20"
       },
       {
         id: generateId(),
-        name: "Luggage Loading",
-        description: "Supervise luggage collection and loading before departure",
-        time: "09:15"
+        name: "Swimming Session Headcount",
+        description: "Complete headcount before the swimming session.",
+        time: "07:25"
       },
       {
         id: generateId(),
-        name: "Sasan Gir Transfer Briefing",
-        description: "Give transfer, safety and group movement instructions",
-        time: "09:20"
+        name: "Swimming Pool Session",
+        description: "Students enjoy the swimming pool at the hotel under supervision.",
+        time: "07:30"
       },
       {
         id: generateId(),
-        name: "Sasan Gir Transfer Headcount",
-        description: "Verify students and staff before departure",
-        time: "09:25"
-      },
-      {
-        id: generateId(),
-        name: "Drive to Sasan Gir",
-        description: "Coordinate vehicle transfer from Somnath to Sasan Gir",
-        time: "09:30"
-      },
-      {
-        id: generateId(),
-        name: "Sasan Gir Arrival Coordination",
-        description: "Coordinate arrival, luggage unloading and movement into the hotel",
-        time: "11:00"
-      },
-      {
-        id: generateId(),
-        name: "Hotel Check-In & Room Allotment",
-        description: "Assign quad-sharing rooms and coordinate freshening up",
+        name: "Swimming Session Completion Headcount",
+        description: "Verify all students have exited the pool safely.",
         time: "11:00"
       },
       {
         id: generateId(),
         name: "Lunch Coordination",
-        description: "Coordinate lunch service at the hotel",
+        description: "Coordinate lunch at the hotel.",
+        time: "13:00"
+      },
+      {
+        id: generateId(),
+        name: "Teacher Welfare Check",
+        description: "Check on teachers after lunch.",
+        time: "13:20"
+      },
+      {
+        id: generateId(),
+        name: "City Palace Guided Tour Briefing",
+        description: "Brief students about City Palace, sightseeing rules and group discipline.",
+        time: "13:45"
+      },
+      {
+        id: generateId(),
+        name: "City Palace Headcount",
+        description: "Complete headcount before the guided tour.",
+        time: "13:50"
+      },
+      {
+        id: generateId(),
+        name: "City Palace Guided Tour",
+        description: "Visit City Palace, Udaipur, on a guided tour.",
+        time: "14:00"
+      },
+      {
+        id: generateId(),
+        name: "Return to Hotel",
+        description: "Return to the hotel after the City Palace visit.",
+        time: "17:00"
+      },
+      {
+        id: generateId(),
+        name: "Rajasthani Cultural Dance Briefing",
+        description: "Brief students about the cultural program and expected discipline.",
+        time: "18:00"
+      },
+      {
+        id: generateId(),
+        name: "Cultural Program Headcount",
+        description: "Complete headcount before the cultural program.",
+        time: "18:15"
+      },
+      {
+        id: generateId(),
+        name: "Rajasthani Cultural Dance",
+        description: "Attend the Rajasthani cultural dance program at the hotel lawn.",
+        time: "18:30"
+      },
+      {
+        id: generateId(),
+        name: "Dinner Coordination",
+        description: "Coordinate dinner at the hotel.",
+        time: "20:00"
+      },
+      {
+        id: generateId(),
+        name: "Teacher Welfare Check",
+        description: "Check on teachers after dinner.",
+        time: "20:30"
+      },
+      {
+        id: generateId(),
+        name: "Night Discipline Check",
+        description: "Check student discipline and room occupancy.",
+        time: "21:30"
+      },
+      {
+        id: generateId(),
+        name: "Overnight Stay",
+        description: "Overnight stay at Hotel Shakti Villas, Udaipur.",
+        time: "22:00"
+      }
+    ]
+  },
+  {
+    groupId: generateId(),
+    date: "28 September 2026",
+    tasks: [
+      {
+        id: generateId(),
+        name: "Breakfast Coordination",
+        description: "Coordinate breakfast at the hotel.",
+        time: "08:00"
+      },
+      {
+        id: generateId(),
+        name: "Teacher Welfare Check",
+        description: "Check on teachers after breakfast.",
+        time: "08:20"
+      },
+      {
+        id: generateId(),
+        name: "Departure Briefing for Kumbalgarh",
+        description: "Brief students about the journey to Kumbalgarh and sightseeing arrangements.",
+        time: "08:45"
+      },
+      {
+        id: generateId(),
+        name: "Departure Headcount",
+        description: "Complete headcount before leaving the hotel.",
+        time: "08:50"
+      },
+      {
+        id: generateId(),
+        name: "Depart for Kumbalgarh",
+        description: "Leave Udaipur for Kumbalgarh.",
+        time: "09:00"
+      },
+      {
+        id: generateId(),
+        name: "Kumbalgarh Fort Guided Tour Briefing",
+        description: "Brief students about the fort visit, safety and group discipline.",
+        time: "11:00"
+      },
+      {
+        id: generateId(),
+        name: "Kumbalgarh Fort Headcount",
+        description: "Complete headcount before the guided fort tour.",
+        time: "11:15"
+      },
+      {
+        id: generateId(),
+        name: "Kumbalgarh Fort Guided Tour",
+        description: "Explore Kumbalgarh Fort on a guided tour.",
+        time: "11:30"
+      },
+      {
+        id: generateId(),
+        name: "Lunch Coordination",
+        description: "Coordinate lunch during the sightseeing excursion.",
+        time: "13:00"
+      },
+      {
+        id: generateId(),
+        name: "Teacher Welfare Check",
+        description: "Check on teachers after lunch.",
+        time: "13:30"
+      },
+      {
+        id: generateId(),
+        name: "Return Journey to Udaipur",
+        description: "Return to Udaipur after the Kumbalgarh visit.",
+        time: "14:00"
+      },
+      {
+        id: generateId(),
+        name: "Saheliyon Ki Bari Briefing",
+        description: "Brief students about the visit and group discipline.",
+        time: "16:00"
+      },
+      {
+        id: generateId(),
+        name: "Saheliyon Ki Bari Headcount",
+        description: "Complete headcount before entering Saheliyon Ki Bari.",
+        time: "16:10"
+      },
+      {
+        id: generateId(),
+        name: "Visit Saheliyon Ki Bari",
+        description: "Visit Saheliyon Ki Bari in Udaipur.",
+        time: "16:15"
+      },
+      {
+        id: generateId(),
+        name: "Return to Hotel",
+        description: "Return to Hotel Shakti Villas.",
+        time: "17:30"
+      },
+      {
+        id: generateId(),
+        name: "DJ Night Briefing",
+        description: "Brief students about DJ night rules, safety and discipline.",
+        time: "18:00"
+      },
+      {
+        id: generateId(),
+        name: "DJ Night Headcount",
+        description: "Complete headcount before the DJ night.",
+        time: "18:15"
+      },
+      {
+        id: generateId(),
+        name: "DJ Night at Hotel",
+        description: "Participate in the DJ night at the hotel.",
+        time: "18:30"
+      },
+      {
+        id: generateId(),
+        name: "Dinner Coordination",
+        description: "Coordinate dinner at the hotel.",
+        time: "20:00"
+      },
+      {
+        id: generateId(),
+        name: "Teacher Welfare Check",
+        description: "Check on teachers after dinner.",
+        time: "20:30"
+      },
+      {
+        id: generateId(),
+        name: "Night Discipline Check",
+        description: "Check student discipline and room occupancy.",
+        time: "21:30"
+      },
+      {
+        id: generateId(),
+        name: "Overnight Stay",
+        description: "Overnight stay at Hotel Shakti Villas.",
+        time: "22:00"
+      }
+    ]
+  },
+  {
+    groupId: generateId(),
+    date: "29 September 2026",
+    tasks: [
+      {
+        id: generateId(),
+        name: "Breakfast Coordination",
+        description: "Coordinate breakfast at the hotel.",
+        time: "09:00"
+      },
+      {
+        id: generateId(),
+        name: "Teacher Welfare Check",
+        description: "Check on teachers after breakfast.",
+        time: "09:20"
+      },
+      {
+        id: generateId(),
+        name: "Hotel Check-out",
+        description: "Complete hotel check-out and coordinate student luggage.",
+        time: "10:00"
+      },
+      {
+        id: generateId(),
+        name: "Maharana Pratap Smarak Briefing",
+        description: "Brief students about the visit and sightseeing discipline.",
+        time: "10:15"
+      },
+      {
+        id: generateId(),
+        name: "Maharana Pratap Smarak Headcount",
+        description: "Complete headcount before the visit.",
+        time: "10:20"
+      },
+      {
+        id: generateId(),
+        name: "Visit Maharana Pratap Smarak",
+        description: "Visit Maharana Pratap Smarak.",
+        time: "10:30"
+      },
+      {
+        id: generateId(),
+        name: "Fateh Sagar Lake Photo Stop Briefing",
+        description: "Brief students about the photo stop and safety near the lake.",
+        time: "11:15"
+      },
+      {
+        id: generateId(),
+        name: "Fateh Sagar Lake Headcount",
+        description: "Complete headcount before the photo stop.",
+        time: "11:20"
+      },
+      {
+        id: generateId(),
+        name: "Fateh Sagar Lake Photo Stop",
+        description: "Stop at Fateh Sagar Lake for photographs.",
+        time: "11:30"
+      },
+      {
+        id: generateId(),
+        name: "Authentic Rajasthani Cuisine Lunch",
+        description: "Coordinate authentic Rajasthani cuisine lunch.",
         time: "12:30"
       },
       {
         id: generateId(),
         name: "Teacher Welfare Check",
-        description: "Check teacher lunch arrangements and requirements",
-        time: "12:50"
+        description: "Check on teachers after lunch.",
+        time: "13:00"
       },
       {
         id: generateId(),
-        name: "Swimming Pool Safety Briefing",
-        description: "Give swimming pool safety and discipline instructions",
-        time: "14:20"
+        name: "Departure for Chittorgarh",
+        description: "Move from Udaipur to Chittorgarh by bus.",
+        time: "13:30"
       },
       {
         id: generateId(),
-        name: "Swimming Pool Headcount",
-        description: "Verify students before entering the pool area",
-        time: "14:25"
-      },
-      {
-        id: generateId(),
-        name: "Swimming Pool Leisure Time",
-        description: "Supervise students during leisure time at the swimming pool",
-        time: "14:30"
-      },
-      {
-        id: generateId(),
-        name: "Safari Safety Briefing",
-        description: "Give safari safety, wildlife and group discipline instructions",
-        time: "16:15"
-      },
-      {
-        id: generateId(),
-        name: "Safari Headcount",
-        description: "Verify students before boarding safari vehicles",
-        time: "16:20"
-      },
-      {
-        id: generateId(),
-        name: "Devaliya Safari Park Visit",
-        description: "Coordinate safari in Jeep 6-seaters and supervise students during the wildlife experience",
-        time: "16:30"
-      },
-      {
-        id: generateId(),
-        name: "Return to Hotel",
-        description: "Coordinate return from safari and verify complete headcount",
-        time: "19:00"
-      },
-      {
-        id: generateId(),
-        name: "Cultural Show / High Tea Briefing",
-        description: "Give instructions for the cultural show and maintain group discipline",
-        time: "19:50"
-      },
-      {
-        id: generateId(),
-        name: "Cultural Show / High Tea Headcount",
-        description: "Verify students before the cultural show / high tea session",
-        time: "19:55"
-      },
-      {
-        id: generateId(),
-        name: "Cultural Show / High Tea Session",
-        description: "Coordinate cultural show and high tea session",
-        time: "20:00"
-      },
-      {
-        id: generateId(),
-        name: "Dinner Coordination",
-        description: "Coordinate dinner service at the hotel",
-        time: "21:30"
-      },
-      {
-        id: generateId(),
-        name: "Teacher Welfare Check",
-        description: "Check teacher dinner arrangements and requirements",
-        time: "21:50"
-      },
-      {
-        id: generateId(),
-        name: "Night Discipline Check",
-        description: "Check rooms, student wellbeing and ensure night discipline",
-        time: "22:30"
-      }
-    ]
-  },
-
-  {
-    groupId: generateId(),
-    date: "DAY 04 – DIU DAY TOUR",
-    tasks: [
-      {
-        id: generateId(),
-        name: "Wake-Up Coordination",
-        description: "Wake students and ensure readiness for the Diu day tour",
-        time: "06:30"
-      },
-      {
-        id: generateId(),
-        name: "Breakfast Coordination",
-        description: "Coordinate breakfast at the hotel",
-        time: "07:00"
-      },
-      {
-        id: generateId(),
-        name: "Teacher Welfare Check",
-        description: "Check teacher breakfast arrangements and requirements",
-        time: "07:20"
-      },
-      {
-        id: generateId(),
-        name: "Team Building Briefing",
-        description: "Explain team building activity rules, safety instructions and discipline",
-        time: "08:45"
-      },
-      {
-        id: generateId(),
-        name: "Team Building Headcount",
-        description: "Verify students before starting the activities",
-        time: "08:50"
-      },
-      {
-        id: generateId(),
-        name: "Team Building Activities",
-        description: "Coordinate team building activities including treasure hunt",
-        time: "09:00"
-      },
-      {
-        id: generateId(),
-        name: "Diu Transfer Briefing",
-        description: "Give transfer, safety and group movement instructions before leaving for Diu",
-        time: "09:45"
-      },
-      {
-        id: generateId(),
-        name: "Diu Transfer Headcount",
-        description: "Verify all students and staff before departure",
-        time: "09:50"
-      },
-      {
-        id: generateId(),
-        name: "Drive to Diu",
-        description: "Coordinate vehicle transfer to Diu",
-        time: "10:00"
-      },
-      {
-        id: generateId(),
-        name: "Diu Fort & INS Khukri Memorial Briefing",
-        description: "Give site safety, historical visit and group movement instructions",
-        time: "11:50"
-      },
-      {
-        id: generateId(),
-        name: "Diu Fort & INS Khukri Memorial Headcount",
-        description: "Verify students before entering the sightseeing area",
-        time: "11:55"
-      },
-      {
-        id: generateId(),
-        name: "Diu Fort & INS Khukri Memorial Visit",
-        description: "Coordinate sightseeing and supervise student movement",
-        time: "12:00"
-      },
-      {
-        id: generateId(),
-        name: "Nagoa Beach Safety Briefing",
-        description: "Give beach safety, water safety and group discipline instructions",
-        time: "15:45"
-      },
-      {
-        id: generateId(),
-        name: "Nagoa Beach Headcount",
-        description: "Verify students before entering the beach area",
-        time: "15:50"
-      },
-      {
-        id: generateId(),
-        name: "Nagoa Beach Visit",
-        description: "Supervise students and maintain controlled group movement at the beach",
+        name: "Arrival at Chittorgarh",
+        description: "Arrive at Chittorgarh.",
         time: "16:00"
       },
       {
         id: generateId(),
-        name: "Return to Sasan Gir",
-        description: "Coordinate return transfer and verify complete headcount",
+        name: "Chittorgarh Fort Guided Tour Briefing",
+        description: "Brief students about the fort tour, local auto arrangements and safety.",
+        time: "16:10"
+      },
+      {
+        id: generateId(),
+        name: "Chittorgarh Fort Headcount",
+        description: "Complete headcount before starting the guided tour.",
+        time: "16:20"
+      },
+      {
+        id: generateId(),
+        name: "Chittorgarh Fort Guided Tour",
+        description: "Visit Chittorgarh Fort with local autos and a guide.",
         time: "16:30"
       },
       {
         id: generateId(),
-        name: "DJ Night / Reflection Briefing",
-        description: "Give event safety and discipline instructions",
-        time: "19:20"
-      },
-      {
-        id: generateId(),
-        name: "DJ Night / Reflection Headcount",
-        description: "Verify students before the evening session",
-        time: "19:25"
-      },
-      {
-        id: generateId(),
-        name: "DJ Night / Reflection Session",
-        description: "Coordinate evening DJ and reflection session while maintaining discipline",
+        name: "Dinner Coordination",
+        description: "Coordinate dinner at the arranged restaurant.",
         time: "19:30"
       },
       {
         id: generateId(),
-        name: "Dinner Coordination",
-        description: "Coordinate dinner service at the hotel",
-        time: "20:30"
-      },
-      {
-        id: generateId(),
         name: "Teacher Welfare Check",
-        description: "Check teacher dinner arrangements and requirements",
-        time: "20:50"
-      },
-      {
-        id: generateId(),
-        name: "Night Discipline Check",
-        description: "Check rooms and ensure student wellbeing before overnight stay",
-        time: "22:30"
-      }
-    ]
-  },
-
-  {
-    groupId: generateId(),
-    date: "DAY 05 – SASAN GIR TO JUNAGADH & RETURN JOURNEY",
-    tasks: [
-      {
-        id: generateId(),
-        name: "Wake-Up & Packing",
-        description: "Wake students and ensure luggage is packed and rooms are cleared",
-        time: "06:30"
-      },
-      {
-        id: generateId(),
-        name: "Breakfast Coordination",
-        description: "Coordinate breakfast at the hotel",
-        time: "07:00"
-      },
-      {
-        id: generateId(),
-        name: "Teacher Welfare Check",
-        description: "Check teacher breakfast arrangements and requirements",
-        time: "07:20"
-      },
-      {
-        id: generateId(),
-        name: "Hotel Checkout",
-        description: "Coordinate room clearance, key collection and hotel checkout",
-        time: "08:00"
-      },
-      {
-        id: generateId(),
-        name: "Luggage Loading",
-        description: "Ensure all luggage is collected and loaded into vehicles",
-        time: "08:15"
-      },
-      {
-        id: generateId(),
-        name: "Junagadh Transfer Briefing",
-        description: "Give transfer and railway journey instructions",
-        time: "08:30"
-      },
-      {
-        id: generateId(),
-        name: "Junagadh Transfer Headcount",
-        description: "Verify students and staff before departure",
-        time: "08:35"
-      },
-      {
-        id: generateId(),
-        name: "Drive to Junagadh Station",
-        description: "Coordinate transfer to Junagadh Station",
-        time: "08:40"
-      },
-      {
-        id: generateId(),
-        name: "Junagadh Station Arrival",
-        description: "Coordinate arrival at Junagadh Station and prepare students for boarding",
-        time: "10:20"
-      },
-      {
-        id: generateId(),
-        name: "Packed Lunch Coordination",
-        description: "Distribute packed lunch provided by the hotel",
-        time: "11:00"
-      },
-      {
-        id: generateId(),
-        name: "Teacher Welfare Check",
-        description: "Check teacher lunch arrangements and requirements",
-        time: "11:10"
-      },
-      {
-        id: generateId(),
-        name: "Train Boarding Briefing",
-        description: "Give train safety, seating and discipline instructions",
-        time: "11:15"
-      },
-      {
-        id: generateId(),
-        name: "Final Train Headcount",
-        description: "Verify all students and staff before boarding the return train",
-        time: "11:20"
-      },
-      {
-        id: generateId(),
-        name: "Train Boarding Coordination",
-        description: "Coordinate boarding on Train No. 11463 – Somnath Express and verify seating",
-        time: "11:23"
-      },
-      {
-        id: generateId(),
-        name: "Return Journey Monitoring",
-        description: "Maintain student safety and discipline during the return train journey",
-        time: "14:00"
-      },
-      {
-        id: generateId(),
-        name: "Dinner Coordination",
-        description: "Coordinate dinner arrangements during the return journey",
+        description: "Check on teachers after dinner.",
         time: "20:00"
       },
       {
         id: generateId(),
-        name: "Teacher Welfare Check",
-        description: "Check teacher dinner arrangements and requirements",
-        time: "20:20"
+        name: "Transfer to Railway Station",
+        description: "Coordinate the transfer to Chittorgarh Railway Station.",
+        time: "23:45"
+      },
+      {
+        id: generateId(),
+        name: "Train Boarding Briefing",
+        description: "Brief students about the return train journey to Bhopal.",
+        time: "00:00"
+      },
+      {
+        id: generateId(),
+        name: "Return Train Headcount",
+        description: "Complete headcount before boarding the return train.",
+        time: "00:20"
+      },
+      {
+        id: generateId(),
+        name: "Board KWP BPL Express",
+        description: "Board Train No. 19711 KWP BPL Express for Bhopal.",
+        time: "00:45"
       },
       {
         id: generateId(),
         name: "Night Discipline Check",
-        description: "Check student wellbeing and maintain discipline during the overnight journey",
-        time: "22:00"
+        description: "Check student discipline and safety during the overnight train journey.",
+        time: "01:00"
       }
     ]
   },
-
   {
     groupId: generateId(),
-    date: "DAY 06 – ARRIVAL AT BHOPAL",
+    date: "30 September 2026",
     tasks: [
       {
         id: generateId(),
-        name: "Arrival Preparation",
-        description: "Ensure students collect all personal belongings and prepare for deboarding",
-        time: "06:30"
+        name: "Breakfast Coordination in Train",
+        description: "Coordinate breakfast during the return train journey.",
+        time: "08:00"
       },
       {
         id: generateId(),
-        name: "Final Headcount",
-        description: "Complete final student and staff headcount before deboarding",
-        time: "06:45"
+        name: "Teacher Welfare Check",
+        description: "Check on teachers after breakfast.",
+        time: "08:30"
       },
       {
         id: generateId(),
-        name: "Arrival at Rani Kamlapati",
-        description: "Coordinate safe arrival and deboarding at Rani Kamlapati (Bhopal) Junction",
-        time: "07:00"
+        name: "Prepare for Arrival at Bhopal",
+        description: "Ensure students collect their belongings and prepare to disembark.",
+        time: "10:30"
       },
       {
         id: generateId(),
-        name: "Luggage Check",
-        description: "Ensure all student luggage and personal belongings have been collected",
-        time: "07:10"
+        name: "Arrival at Bhopal Junction",
+        description: "Arrive at Bhopal Junction.",
+        time: "11:00"
       },
       {
         id: generateId(),
-        name: "Disembark & Check-Out",
-        description: "Complete student disembarkation and final tour check-out",
-        time: "07:30"
+        name: "Final Student Headcount",
+        description: "Complete final headcount after arrival.",
+        time: "11:05"
       },
       {
         id: generateId(),
-        name: "Final Handover & Tour Closure",
-        description: "Complete student handover and formally close the tour",
-        time: "07:30"
+        name: "Luggage Verification",
+        description: "Ensure all student luggage and belongings are collected.",
+        time: "11:10"
+      },
+      {
+        id: generateId(),
+        name: "Student Handover",
+        description: "Coordinate safe handover of students to parents or guardians.",
+        time: "11:15"
+      },
+      {
+        id: generateId(),
+        name: "Tour Closure",
+        description: "Conclude the Rajasthan Heritage Educational Tour.",
+        time: "11:30"
       }
     ]
   }
-]
+],
+        
+},
 
-    },
+
   jaipur: {
     tripName: "JIBHI - TIRTHAN VALLEY TRIP",
     tripDate: "9 MAY",
@@ -1275,6 +1225,612 @@ export const templatesById: Record<string, TripTemplate> = {
 }
 };
 
+
+
+
+// BHOPAL
+// groups: [
+//   {
+//     groupId: generateId(),
+//     date: "DAY 01 – DEPARTURE FROM BHOPAL",
+//     tasks: [
+//       {
+//         id: generateId(),
+//         name: "Coordinator Reporting & Setup",
+//         description: "Report at Rani Kamlapati (Bhopal) Junction and prepare attendance and travel arrangements",
+//         time: "18:00"
+//       },
+     
+//       {
+//         id: generateId(),
+//         name: "Counting, Grouping & Briefing",
+//         description: "Group students and brief them about safety, discipline and train journey instructions",
+//         time: "18:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Train Details Verification",
+//         description: "Verify train number, coach details and student seating arrangements",
+//         time: "18:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Final Headcount",
+//         description: "Complete final student and staff headcount before boarding",
+//         time: "19:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Train Boarding Coordination",
+//         description: "Coordinate boarding on Train No. 11464 – Somnath Express and ensure students are seated properly",
+//         time: "19:45"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Dinner Coordination",
+//         description: "Ensure students have dinner brought from home and manage dinner during the train journey",
+//         time: "20:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Teacher Welfare Check",
+//         description: "Check teacher dinner arrangements and requirements",
+//         time: "20:50"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Night Discipline Check",
+//         description: "Check student wellbeing and ensure discipline during the overnight train journey",
+//         time: "22:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Overnight Journey Monitoring",
+//         description: "Maintain student safety and discipline throughout the overnight train journey",
+//         time: "23:00"
+//       }
+//     ]
+//   },
+
+//   {
+//     groupId: generateId(),
+//     date: "DAY 02 – ARRIVAL AT VERAVAL & SOMNATH",
+//     tasks: [
+//       {
+//         id: generateId(),
+//         name: "Arrival at Veraval Railway Station",
+//         description: "Coordinate safe deboarding and verify complete student headcount",
+//         time: "17:25"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Luggage Collection",
+//         description: "Ensure all student luggage is collected from the train",
+//         time: "17:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Bus Boarding Coordination",
+//         description: "Coordinate boarding into AC bus for transfer towards Somnath",
+//         time: "17:45"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Transfer to Somnath",
+//         description: "Monitor safe transfer from Veraval to Somnath",
+//         time: "17:45"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Hotel Check-In",
+//         description: "Coordinate hotel check-in and assign quad-sharing rooms",
+//         time: "18:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Room Allotment",
+//         description: "Distribute rooms according to the approved rooming list",
+//         time: "18:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Freshen-Up Coordination",
+//         description: "Ensure students settle into rooms and freshen up before the temple visit",
+//         time: "18:10"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Somnath Temple Briefing",
+//         description: "Give temple visit, safety and discipline instructions",
+//         time: "18:20"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Somnath Temple Headcount",
+//         description: "Verify all students and staff before entering the temple",
+//         time: "18:25"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Somnath Temple – Jyotirlinga Darshan",
+//         description: "Coordinate spiritual experience and temple visit while maintaining group discipline",
+//         time: "18:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Dinner Coordination",
+//         description: "Coordinate dinner service at the hotel",
+//         time: "20:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Teacher Welfare Check",
+//         description: "Check teacher dinner arrangements and requirements",
+//         time: "20:50"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Night Discipline Check",
+//         description: "Check rooms, student wellbeing and ensure proper night discipline",
+//         time: "22:00"
+//       }
+//     ]
+//   },
+
+//   {
+//     groupId: generateId(),
+//     date: "DAY 03 – SOMNATH TO SASAN GIR & SAFARI",
+//     tasks: [
+//       {
+//         id: generateId(),
+//         name: "Wake-Up Coordination",
+//         description: "Wake students and ensure readiness for the day's transfer",
+//         time: "07:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Breakfast Coordination",
+//         description: "Coordinate breakfast service at the hotel",
+//         time: "07:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Teacher Welfare Check",
+//         description: "Check teacher breakfast arrangements and requirements",
+//         time: "07:50"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Hotel Checkout",
+//         description: "Coordinate room clearance and hotel checkout",
+//         time: "09:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Luggage Loading",
+//         description: "Supervise luggage collection and loading before departure",
+//         time: "09:15"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Sasan Gir Transfer Briefing",
+//         description: "Give transfer, safety and group movement instructions",
+//         time: "09:20"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Sasan Gir Transfer Headcount",
+//         description: "Verify students and staff before departure",
+//         time: "09:25"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Drive to Sasan Gir",
+//         description: "Coordinate vehicle transfer from Somnath to Sasan Gir",
+//         time: "09:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Sasan Gir Arrival Coordination",
+//         description: "Coordinate arrival, luggage unloading and movement into the hotel",
+//         time: "11:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Hotel Check-In & Room Allotment",
+//         description: "Assign quad-sharing rooms and coordinate freshening up",
+//         time: "11:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Lunch Coordination",
+//         description: "Coordinate lunch service at the hotel",
+//         time: "12:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Teacher Welfare Check",
+//         description: "Check teacher lunch arrangements and requirements",
+//         time: "12:50"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Swimming Pool Safety Briefing",
+//         description: "Give swimming pool safety and discipline instructions",
+//         time: "14:20"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Swimming Pool Headcount",
+//         description: "Verify students before entering the pool area",
+//         time: "14:25"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Swimming Pool Leisure Time",
+//         description: "Supervise students during leisure time at the swimming pool",
+//         time: "14:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Safari Safety Briefing",
+//         description: "Give safari safety, wildlife and group discipline instructions",
+//         time: "16:15"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Safari Headcount",
+//         description: "Verify students before boarding safari vehicles",
+//         time: "16:20"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Devaliya Safari Park Visit",
+//         description: "Coordinate safari in Jeep 6-seaters and supervise students during the wildlife experience",
+//         time: "16:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Return to Hotel",
+//         description: "Coordinate return from safari and verify complete headcount",
+//         time: "19:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Cultural Show / High Tea Briefing",
+//         description: "Give instructions for the cultural show and maintain group discipline",
+//         time: "19:50"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Cultural Show / High Tea Headcount",
+//         description: "Verify students before the cultural show / high tea session",
+//         time: "19:55"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Cultural Show / High Tea Session",
+//         description: "Coordinate cultural show and high tea session",
+//         time: "20:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Dinner Coordination",
+//         description: "Coordinate dinner service at the hotel",
+//         time: "21:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Teacher Welfare Check",
+//         description: "Check teacher dinner arrangements and requirements",
+//         time: "21:50"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Night Discipline Check",
+//         description: "Check rooms, student wellbeing and ensure night discipline",
+//         time: "22:30"
+//       }
+//     ]
+//   },
+
+//   {
+//     groupId: generateId(),
+//     date: "DAY 04 – DIU DAY TOUR",
+//     tasks: [
+//       {
+//         id: generateId(),
+//         name: "Wake-Up Coordination",
+//         description: "Wake students and ensure readiness for the Diu day tour",
+//         time: "06:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Breakfast Coordination",
+//         description: "Coordinate breakfast at the hotel",
+//         time: "07:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Teacher Welfare Check",
+//         description: "Check teacher breakfast arrangements and requirements",
+//         time: "07:20"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Team Building Briefing",
+//         description: "Explain team building activity rules, safety instructions and discipline",
+//         time: "08:45"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Team Building Headcount",
+//         description: "Verify students before starting the activities",
+//         time: "08:50"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Team Building Activities",
+//         description: "Coordinate team building activities including treasure hunt",
+//         time: "09:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Diu Transfer Briefing",
+//         description: "Give transfer, safety and group movement instructions before leaving for Diu",
+//         time: "09:45"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Diu Transfer Headcount",
+//         description: "Verify all students and staff before departure",
+//         time: "09:50"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Drive to Diu",
+//         description: "Coordinate vehicle transfer to Diu",
+//         time: "10:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Diu Fort & INS Khukri Memorial Briefing",
+//         description: "Give site safety, historical visit and group movement instructions",
+//         time: "11:50"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Diu Fort & INS Khukri Memorial Headcount",
+//         description: "Verify students before entering the sightseeing area",
+//         time: "11:55"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Diu Fort & INS Khukri Memorial Visit",
+//         description: "Coordinate sightseeing and supervise student movement",
+//         time: "12:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Nagoa Beach Safety Briefing",
+//         description: "Give beach safety, water safety and group discipline instructions",
+//         time: "15:45"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Nagoa Beach Headcount",
+//         description: "Verify students before entering the beach area",
+//         time: "15:50"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Nagoa Beach Visit",
+//         description: "Supervise students and maintain controlled group movement at the beach",
+//         time: "16:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Return to Sasan Gir",
+//         description: "Coordinate return transfer and verify complete headcount",
+//         time: "16:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "DJ Night / Reflection Briefing",
+//         description: "Give event safety and discipline instructions",
+//         time: "19:20"
+//       },
+//       {
+//         id: generateId(),
+//         name: "DJ Night / Reflection Headcount",
+//         description: "Verify students before the evening session",
+//         time: "19:25"
+//       },
+//       {
+//         id: generateId(),
+//         name: "DJ Night / Reflection Session",
+//         description: "Coordinate evening DJ and reflection session while maintaining discipline",
+//         time: "19:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Dinner Coordination",
+//         description: "Coordinate dinner service at the hotel",
+//         time: "20:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Teacher Welfare Check",
+//         description: "Check teacher dinner arrangements and requirements",
+//         time: "20:50"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Night Discipline Check",
+//         description: "Check rooms and ensure student wellbeing before overnight stay",
+//         time: "22:30"
+//       }
+//     ]
+//   },
+
+//   {
+//     groupId: generateId(),
+//     date: "DAY 05 – SASAN GIR TO JUNAGADH & RETURN JOURNEY",
+//     tasks: [
+//       {
+//         id: generateId(),
+//         name: "Wake-Up & Packing",
+//         description: "Wake students and ensure luggage is packed and rooms are cleared",
+//         time: "06:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Breakfast Coordination",
+//         description: "Coordinate breakfast at the hotel",
+//         time: "07:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Teacher Welfare Check",
+//         description: "Check teacher breakfast arrangements and requirements",
+//         time: "07:20"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Hotel Checkout",
+//         description: "Coordinate room clearance, key collection and hotel checkout",
+//         time: "08:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Luggage Loading",
+//         description: "Ensure all luggage is collected and loaded into vehicles",
+//         time: "08:15"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Junagadh Transfer Briefing",
+//         description: "Give transfer and railway journey instructions",
+//         time: "08:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Junagadh Transfer Headcount",
+//         description: "Verify students and staff before departure",
+//         time: "08:35"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Drive to Junagadh Station",
+//         description: "Coordinate transfer to Junagadh Station",
+//         time: "08:40"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Junagadh Station Arrival",
+//         description: "Coordinate arrival at Junagadh Station and prepare students for boarding",
+//         time: "10:20"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Packed Lunch Coordination",
+//         description: "Distribute packed lunch provided by the hotel",
+//         time: "11:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Teacher Welfare Check",
+//         description: "Check teacher lunch arrangements and requirements",
+//         time: "11:10"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Train Boarding Briefing",
+//         description: "Give train safety, seating and discipline instructions",
+//         time: "11:15"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Final Train Headcount",
+//         description: "Verify all students and staff before boarding the return train",
+//         time: "11:20"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Train Boarding Coordination",
+//         description: "Coordinate boarding on Train No. 11463 – Somnath Express and verify seating",
+//         time: "11:23"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Return Journey Monitoring",
+//         description: "Maintain student safety and discipline during the return train journey",
+//         time: "14:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Dinner Coordination",
+//         description: "Coordinate dinner arrangements during the return journey",
+//         time: "20:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Teacher Welfare Check",
+//         description: "Check teacher dinner arrangements and requirements",
+//         time: "20:20"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Night Discipline Check",
+//         description: "Check student wellbeing and maintain discipline during the overnight journey",
+//         time: "22:00"
+//       }
+//     ]
+//   },
+
+//   {
+//     groupId: generateId(),
+//     date: "DAY 06 – ARRIVAL AT BHOPAL",
+//     tasks: [
+//       {
+//         id: generateId(),
+//         name: "Arrival Preparation",
+//         description: "Ensure students collect all personal belongings and prepare for deboarding",
+//         time: "06:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Final Headcount",
+//         description: "Complete final student and staff headcount before deboarding",
+//         time: "06:45"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Arrival at Rani Kamlapati",
+//         description: "Coordinate safe arrival and deboarding at Rani Kamlapati (Bhopal) Junction",
+//         time: "07:00"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Luggage Check",
+//         description: "Ensure all student luggage and personal belongings have been collected",
+//         time: "07:10"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Disembark & Check-Out",
+//         description: "Complete student disembarkation and final tour check-out",
+//         time: "07:30"
+//       },
+//       {
+//         id: generateId(),
+//         name: "Final Handover & Tour Closure",
+//         description: "Complete student handover and formally close the tour",
+//         time: "07:30"
+//       }
+//     ]
+//   }
+// ]
 //UDAIPUR 
 //    groups: [
 //   {

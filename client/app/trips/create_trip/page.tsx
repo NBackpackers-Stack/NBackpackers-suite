@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { templatesById } from "../../../public/sampleData";
+import JsonImportModal, { normalizeDate, normalizeTime } from "@/component/trips/JsonImportModal";
 
 interface TaskRow {
     id: string;
@@ -39,14 +40,46 @@ export default function page() {
     const [groups, setGroups] = useState<DateGroup[]>([emptyGroup()]);
     const [saving, setSaving] = useState(false);
     const [saved, setSaved] = useState(false);
+    const [isJsonModalOpen, setIsJsonModalOpen] = useState(false);
+    const [toastMessage, setToastMessage] = useState("");
+
+    const showToast = (msg: string) => {
+        setToastMessage(msg);
+        setTimeout(() => setToastMessage(""), 3500);
+    };
 
     const loadExample = (key: string) => {
         const tpl = templatesById[key];
         if (!tpl) return;
         setTripName(tpl.tripName);
-        setTripDate(tpl.tripDate);
+        setTripDate(normalizeDate(tpl.tripDate));
         setTripDiscussion(tpl.tripDiscussion);
-        setGroups(tpl.groups);
+        setGroups(
+            tpl.groups.map((g) => ({
+                ...g,
+                groupId: g.groupId || generateId(),
+                date: normalizeDate(g.date),
+                tasks: g.tasks.map((t) => ({
+                    ...t,
+                    id: t.id || generateId(),
+                    time: normalizeTime(t.time),
+                })),
+            }))
+        );
+        showToast(`Loaded ${tpl.tripName} template!`);
+    };
+
+    const handleApplyJson = (data: {
+        tripName: string;
+        tripDate: string;
+        tripDiscussion: string;
+        groups: DateGroup[];
+    }) => {
+        setTripName(data.tripName);
+        setTripDate(data.tripDate);
+        setTripDiscussion(data.tripDiscussion);
+        setGroups(data.groups);
+        showToast(`Loaded ${data.groups.length} ${data.groups.length === 1 ? "day" : "days"} & ${data.groups.reduce((a, g) => a + g.tasks.length, 0)} tasks from JSON!`);
     };
 
     /* ── Group helpers ── */
@@ -157,42 +190,84 @@ export default function page() {
                         </div>
                     </div>
 
-                    <button
-                        onClick={handleSave}
-                        disabled={!isValid || saving}
-                        className={`shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all active:scale-95
-              ${isValid && !saving
-                                ? "bg-blue-600 text-white shadow-md shadow-blue-200 hover:bg-blue-700"
-                                : "bg-slate-100 text-slate-400 cursor-not-allowed"}`}
-                    >
-                        {saving ? (
-                            <><div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Saving</>
-                        ) : saved ? (
-                            <><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg> Saved!</>
-                        ) : (
-                            <><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg> Save Trip</>
-                        )}
-                    </button>
+                    <div className="flex items-center gap-2">
+                        <button
+                            type="button"
+                            onClick={() => setIsJsonModalOpen(true)}
+                            className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-slate-900 text-white shadow-sm hover:bg-slate-800 transition-all active:scale-95 border border-slate-700 cursor-pointer"
+                            title="Paste object or array to auto-fill"
+                        >
+                            <svg className="w-3.5 h-3.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                            <span>Paste Object</span>
+                        </button>
+
+                        <button
+                            onClick={handleSave}
+                            disabled={!isValid || saving}
+                            className={`shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all active:scale-95
+                  ${isValid && !saving
+                                    ? "bg-blue-600 text-white shadow-md shadow-blue-200 hover:bg-blue-700 cursor-pointer"
+                                    : "bg-slate-100 text-slate-400 cursor-not-allowed"}`}
+                        >
+                            {saving ? (
+                                <><div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Saving</>
+                            ) : saved ? (
+                                <><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg> Saved!</>
+                            ) : (
+                                <><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg> Save Trip</>
+                            )}
+                        </button>
+                    </div>
                 </div>
             </header>
 
             <main className="max-w-4xl mx-auto px-4 py-5 space-y-5">
 
 
-                {/* ──??? Template loader (demo) ── */}
-                <div className="flex gap-4">
-                    <button
-                        onClick={() => loadExample("goa")}
-                        className="text-sm text-blue-600 underline"
-                    >
-                        Load Goa template
-                    </button>
-                    <button
-                        onClick={() => loadExample("jaipur")}
-                        className="text-sm text-blue-600 underline"
-                    >
-                        Load Jaipur template
-                    </button>
+                {/* ── Quick Setup & Templates Bar ── */}
+                <div className="bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-slate-50 border border-blue-100/80 rounded-2xl p-3.5 sm:p-4 flex flex-wrap items-center justify-between gap-3 shadow-2xs">
+                    <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shadow-sm shadow-blue-200">
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p className="text-xs font-black text-slate-800">Quick Fill via Object / Array</p>
+                            <p className="text-[11px] text-slate-500 font-medium">Paste trip object with date groups and tasks to fill all fields instantly.</p>
+                        </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 flex-wrap">
+                        <button
+                            type="button"
+                            onClick={() => setIsJsonModalOpen(true)}
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600 text-white text-xs font-black tracking-wider uppercase shadow-xs shadow-blue-200 hover:bg-blue-700 transition-all active:scale-95 cursor-pointer"
+                        >
+                            <svg className="w-3.5 h-3.5 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            Paste Object / Array
+                        </button>
+                        <span className="text-xs text-slate-300 font-bold hidden sm:inline">|</span>
+                        <span className="text-[11px] font-bold text-slate-400 hidden sm:inline">Templates:</span>
+                        <button
+                            type="button"
+                            onClick={() => loadExample("goa")}
+                            className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:text-blue-600 hover:border-blue-300 transition-all shadow-2xs cursor-pointer"
+                        >
+                            Goa
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => loadExample("jaipur")}
+                            className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:text-blue-600 hover:border-blue-300 transition-all shadow-2xs cursor-pointer"
+                        >
+                            Jaipur
+                        </button>
+                    </div>
                 </div>
 
                 {/* ── Trip Info ── */}
@@ -474,6 +549,31 @@ export default function page() {
                 </div>
 
             </main>
+
+            {/* ── JSON Import Modal ── */}
+            <JsonImportModal
+                isOpen={isJsonModalOpen}
+                onClose={() => setIsJsonModalOpen(false)}
+                onApply={handleApplyJson}
+                currentFormData={{
+                    tripName,
+                    tripDate,
+                    tripDiscussion,
+                    groups,
+                }}
+            />
+
+            {/* ── Toast Notification ── */}
+            {toastMessage && (
+                <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl shadow-slate-900/25 text-xs font-bold border border-slate-700 animate-in fade-in slide-in-from-bottom-3 duration-200">
+                    <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <span>{toastMessage}</span>
+                </div>
+            )}
         </div>
     );
 }
