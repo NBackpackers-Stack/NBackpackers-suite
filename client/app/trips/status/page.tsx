@@ -283,7 +283,7 @@ export default function Page() {
             )}
             {isLoading && <AnimatedLoader />}
             <div
-                className={`min-h-screen flex flex-col items-center pb-16 ${isLoading ? 'blur-sm pointer-events-none' : ''}`}
+                className={`min-h-screen flex flex-col items-center pt-24 sm:pt-28 pb-16 ${isLoading ? 'blur-sm pointer-events-none' : ''}`}
                 style={{ background: "linear-gradient(180deg, #f0f4ff 0%, #fafafa 100%)" }}
             >
                 <div className="w-full max-w-xl px-4 py-8 sm:px-6">
