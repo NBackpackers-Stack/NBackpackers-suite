@@ -12,5 +12,6 @@ export const API = {
     feedback: "/api/mess/feedback",
     recciSave: "/api/recci/save",
     recciGetAll: "/api/recci/getAll",
-    recciGetById: "/api/recci/getById"
+    recciGetById: "/api/recci/getById",
+    getAllTrips: "/api/getAllTrips"
 }
