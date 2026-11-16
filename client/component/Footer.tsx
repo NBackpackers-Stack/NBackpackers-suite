@@ -23,7 +23,8 @@ export default function Footer() {
         pathname === '/mess/QRCodeform' ||
         pathname === '/feedback/PDDU/QR_code_form' ||
         pathname?.includes('QR_code_form') ||
-        pathname?.includes('QRCodeform')
+        pathname?.includes('QRCodeform') ||
+        pathname?.includes('/cafe/makeOrder')
     ) {
         return null;
     }

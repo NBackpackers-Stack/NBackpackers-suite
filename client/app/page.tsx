@@ -88,6 +88,18 @@ export default function page() {
             />
 
             <PortalCard
+              href="/cafe"
+              title="Cafe"
+              description="Manage cafe inventory, track daily beverage orders, oversee menu items, and optimize branch cafe operations."
+              theme="amber"
+              icon={
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 2v3M10 2v3M14 2v3" />
+                </svg>
+              }
+            />
+
+            <PortalCard
               href="/manager"
               title="Manager"
               description="Access your secure administrative dashboard to oversee global bookings, manage branches, and view high-level analytics."
