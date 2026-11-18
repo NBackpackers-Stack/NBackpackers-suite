@@ -37,13 +37,13 @@ export default function CafeDashboard() {
       ),
     },
     {
-      title: "Menu & Pricing",
-      description: "View and customize hot beverages, iced brews, bakery, and snack offerings.",
-      href: "#menu",
-      bgLight: "bg-amber-100",
-      textColor: "text-amber-800",
-      hoverBg: "group-hover:bg-amber-600",
-      borderColor: "hover:border-amber-200",
+      title: "Menu & Ordering",
+      description: "Browse menu items, select beverages or meals, and place customer orders.",
+      href: "/cafe/menu",
+      bgLight: "bg-emerald-100",
+      textColor: "text-emerald-800",
+      hoverBg: "group-hover:bg-emerald-600",
+      borderColor: "hover:border-emerald-200",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -53,7 +53,7 @@ export default function CafeDashboard() {
     {
       title: "Daily Consumption & Orders",
       description: "Log daily cafe supplies consumed and create customer beverage and food orders.",
-      href: "/cafe/makeOrder",
+      href: "/cafe/menu",
       bgLight: "bg-rose-100",
       textColor: "text-rose-600",
       hoverBg: "group-hover:bg-rose-500",

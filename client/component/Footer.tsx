@@ -6,26 +6,29 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export default function Footer() {
-    const [mounted, setMounted] = useState(false);
     const pathname = usePathname();
+
+    const isHiddenPage =
+        pathname?.includes('login') ||
+        pathname?.includes('signup') ||
+        pathname?.includes('QRCodeform') ||
+        pathname?.includes('QR_code_form') ||
+        pathname?.includes('cafe/menu') ||
+        pathname?.includes('cafe/cart') ||
+        pathname?.includes('cafe/order') ||
+        pathname?.includes('cafe/makeOrder');
+
+    if (isHiddenPage) {
+        return null;
+    }
+
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
     if (!mounted) {
-        return null;
-    }
-
-    if (
-        pathname === '/auth/login' ||
-        pathname === '/auth/signup' ||
-        pathname === '/mess/QRCodeform' ||
-        pathname === '/feedback/PDDU/QR_code_form' ||
-        pathname?.includes('QR_code_form') ||
-        pathname?.includes('QRCodeform') ||
-        pathname?.includes('/cafe/makeOrder')
-    ) {
         return null;
     }
 
