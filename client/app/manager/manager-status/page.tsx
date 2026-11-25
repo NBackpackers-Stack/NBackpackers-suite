@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import AnimatedLoader from '@/component/AnimatedLoader';
 
-function page() {
+function Page() {
     const router = useRouter();
     const [allDate, setAllDates] = React.useState<any[]>([]);
     const [loading, setLoading] = React.useState(true);
@@ -104,4 +104,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

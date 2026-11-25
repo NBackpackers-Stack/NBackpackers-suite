@@ -12,20 +12,6 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
-  const isHiddenPage =
-    pathname?.includes('login') ||
-    pathname?.includes('signup') ||
-    pathname?.includes('QRCodeform') ||
-    pathname?.includes('QR_code_form') ||
-    pathname?.includes('cafe/menu') ||
-    pathname?.includes('cafe/cart') ||
-    pathname?.includes('cafe/order') ||
-    pathname?.includes('cafe/makeOrder');
-
-  if (isHiddenPage) {
-    return null;
-  }
-
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -71,7 +57,9 @@ export default function Header() {
     pathname?.includes('QR_code_form') ||
     pathname?.includes('QRCodeform') ||
     pathname?.includes('/cafe/menu') ||
-    pathname?.includes('/cafe/cart')
+    pathname?.includes('/cafe/cart') ||
+    pathname?.includes('/cafe/order') ||
+    pathname?.includes('/cafe/makeOrder')
   ) {
     return null;
   }

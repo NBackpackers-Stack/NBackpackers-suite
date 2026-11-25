@@ -9,7 +9,7 @@ type Trip = {
     tripDate?: string;
 };
 
-export default function page() {
+export default function Page() {
     const [trips, setTrips] = useState<Trip[]>([]);
 
     useEffect(() => {

@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
         const { data } = body;
         const { formattedDate, monthName, tasks } = data;
 
-        var taskId: string = "";
+        let taskId: string = "";
         console.log("formatted date and month are ", formattedDate, monthName);
 
 

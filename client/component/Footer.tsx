@@ -7,6 +7,11 @@ import { usePathname } from 'next/navigation';
 
 export default function Footer() {
     const pathname = usePathname();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const isHiddenPage =
         pathname?.includes('login') ||
@@ -18,17 +23,7 @@ export default function Footer() {
         pathname?.includes('cafe/order') ||
         pathname?.includes('cafe/makeOrder');
 
-    if (isHiddenPage) {
-        return null;
-    }
-
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted) {
+    if (isHiddenPage || !mounted) {
         return null;
     }
 
