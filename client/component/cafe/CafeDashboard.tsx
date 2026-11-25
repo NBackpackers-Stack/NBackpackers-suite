@@ -89,34 +89,34 @@ export default function CafeDashboard() {
             </div>
           </div>
 
-          {/* Tile 2: Menu & Ordering (Browse & Place Orders) */}
+          {/* Tile 2: Edit Menu (Manage, Edit, Add & Delete Items) */}
           <Link
-            href="/cafe/menu"
+            href="/cafe/editMenu"
             className="group relative overflow-hidden bg-white rounded-3xl p-6 sm:p-7 shadow-sm border border-slate-200/90 hover:border-amber-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 group-hover:bg-gradient-to-tr group-hover:from-amber-500 group-hover:to-orange-500 group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-inner">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
                 </div>
                 <span className="inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-wider text-amber-800 bg-amber-100/70 border border-amber-200 px-2.5 py-1 rounded-full">
-                  Live Ordering
+                  Menu Management
                 </span>
               </div>
 
               <h2 className="text-xl font-black text-slate-900 group-hover:text-amber-700 transition-colors mb-2">
-                Menu & Ordering
+                Edit Menu
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 font-medium leading-relaxed">
-                Browse all food and beverage categories, add items to cart with live price calculations, and place customer orders.
+                Update dish prices, modify item names, manage availability status, add new dishes, and remove items from the cafe menu.
               </p>
             </div>
 
             <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-black text-amber-700 group-hover:text-amber-800">
               <span className="flex items-center gap-1.5">
-                <span>🍽️</span> Open Cafe Ordering App
+                <span>✏️</span> Open Menu Editor
               </span>
               <svg className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />

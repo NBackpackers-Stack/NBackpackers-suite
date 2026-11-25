@@ -12,9 +12,11 @@ export interface CartItem {
 }
 
 export interface MenuItemType {
+    _id?: string;
     category: string;
     item: string;
     price: string;
+    isAvailable?: boolean;
 }
 
 export const parseMenuPrice = (priceStr?: string): { numericPrice: number; isMrp: boolean } => {
@@ -89,6 +91,10 @@ export function CafeCartProvider({ children }: { children: React.ReactNode }) {
 
     // Add item to cart or increment
     const addToCart = useCallback((menuItem: MenuItemType) => {
+        if (menuItem.isAvailable === false) {
+            return;
+        }
+
         setCartItems((prev) => {
             const existingIndex = prev.findIndex((i) => i.name === menuItem.item);
             if (existingIndex > -1) {

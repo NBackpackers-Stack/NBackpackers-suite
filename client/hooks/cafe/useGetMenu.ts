@@ -39,9 +39,11 @@ export function useGetMenu(cafeName = "IDST Backpackers Cafe"): UseGetMenuReturn
             if (res && res.data && Array.isArray(res.data.items) && res.data.items.length > 0) {
                 // Map items from database
                 const dbItems: MenuItemType[] = res.data.items.map((i: any) => ({
+                    _id: i._id,
                     category: i.category,
                     item: i.item,
                     price: i.price,
+                    isAvailable: i.isAvailable !== undefined ? Boolean(i.isAvailable) : true,
                 }));
                 setMenuItems(dbItems);
                 setIsFromDatabase(true);

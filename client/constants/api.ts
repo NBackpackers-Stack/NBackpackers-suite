@@ -15,5 +15,8 @@ export const API = {
     recciGetById: "/api/recci/getById",
     getAllTrips: "/api/getAllTrips",
     createMenu: "/api/cafe/createMenu",
-    getMenu: "/api/cafe/getMenu"
+    getMenu: "/api/cafe/getMenu",
+    addMenuItem: "/api/cafe/addItem",
+    editMenuItem: "/api/cafe/editItem",
+    deleteMenuItem: "/api/cafe/deleteItem"
 }

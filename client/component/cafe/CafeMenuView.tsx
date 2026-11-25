@@ -149,11 +149,10 @@ export default function CafeMenuView() {
                                 key={cat}
                                 type="button"
                                 onClick={() => setSelectedCategory(cat)}
-                                className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-black transition-all cursor-pointer active:scale-95 ${
-                                    isSelected
+                                className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-black transition-all cursor-pointer active:scale-95 ${isSelected
                                         ? "bg-slate-900 text-white shadow-md shadow-slate-900/20 scale-[1.02]"
                                         : `${meta.bg} ${meta.text} border ${meta.border} hover:opacity-90 shadow-2xs`
-                                }`}
+                                    }`}
                             >
                                 <span className="text-xs">{meta.icon}</span>
                                 <span>{cat}</span>
@@ -211,46 +210,65 @@ export default function CafeMenuView() {
                                             </h2>
                                         </div>
                                         <span className="text-[11px] font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-100">
-                                            {items.length} {items.length === 1 ? "dish" : "dishes"}
+                                            {`${items.length} ${items.length === 1 ? "dish" : "dishes"}`}
                                         </span>
                                     </div>
 
                                     {/* Items List in this Category */}
                                     <div className="divide-y divide-slate-100">
                                         {items.map((item) => {
+                                            const isAvailable = item.isAvailable !== false;
                                             const isNonVeg = isNonVegItem(item.item);
                                             const qty = getItemQuantity(item.item);
 
                                             return (
                                                 <div
                                                     key={item.item}
-                                                    className="py-3 flex items-center justify-between gap-3 group"
+                                                    className={`py-3 flex items-center justify-between gap-3 group transition-all ${!isAvailable ? "opacity-60 grayscale bg-slate-50/80 -mx-1.5 px-2 rounded-2xl select-none" : ""
+                                                        }`}
                                                 >
                                                     {/* Item Info */}
                                                     <div className="min-w-0 flex-1">
                                                         <div className="flex items-center gap-1.5 mb-1">
                                                             {/* Veg / Non-Veg Indicator */}
                                                             <span
-                                                                className={`w-3.5 h-3.5 rounded-xs border flex items-center justify-center shrink-0 ${
-                                                                    isNonVeg ? "border-rose-600" : "border-emerald-600"
-                                                                }`}
-                                                                title={isNonVeg ? "Non-Vegetarian" : "Vegetarian"}
+                                                                className={`w-3.5 h-3.5 rounded-xs border flex items-center justify-center shrink-0 ${!isAvailable
+                                                                        ? "border-slate-400"
+                                                                        : isNonVeg
+                                                                            ? "border-rose-600"
+                                                                            : "border-emerald-600"
+                                                                    }`}
+                                                                title={!isAvailable ? "Unavailable" : isNonVeg ? "Non-Vegetarian" : "Vegetarian"}
                                                             >
                                                                 <span
-                                                                    className={`w-1.5 h-1.5 rounded-full ${
-                                                                        isNonVeg ? "bg-rose-600" : "bg-emerald-600"
-                                                                    }`}
+                                                                    className={`w-1.5 h-1.5 rounded-full ${!isAvailable
+                                                                            ? "bg-slate-400"
+                                                                            : isNonVeg
+                                                                                ? "bg-rose-600"
+                                                                                : "bg-emerald-600"
+                                                                        }`}
                                                                 ></span>
                                                             </span>
 
-                                                            <h3 className="text-xs sm:text-sm font-black text-slate-800 group-hover:text-orange-600 transition-colors truncate">
+                                                            <h3
+                                                                className={`text-xs sm:text-sm font-black truncate ${!isAvailable
+                                                                        ? "text-slate-400 line-through decoration-slate-300"
+                                                                        : "text-slate-800 group-hover:text-orange-600 transition-colors"
+                                                                    }`}
+                                                            >
                                                                 {item.item}
                                                             </h3>
+
+                                                            {!isAvailable && (
+                                                                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-200/90 text-slate-500 border border-slate-300">
+                                                                    Unavailable
+                                                                </span>
+                                                            )}
                                                         </div>
 
                                                         {/* Price Tag */}
                                                         <div className="flex items-center gap-1.5">
-                                                            <span className="text-xs sm:text-sm font-black text-slate-900">
+                                                            <span className={`text-xs sm:text-sm font-black ${!isAvailable ? "text-slate-400" : "text-slate-900"}`}>
                                                                 {item.price}
                                                             </span>
                                                             {item.price.toUpperCase().includes("M.R.P") && (
@@ -261,9 +279,17 @@ export default function CafeMenuView() {
                                                         </div>
                                                     </div>
 
-                                                    {/* Zomato-Style ADD Button or Stepper */}
+                                                    {/* Zomato-Style ADD Button, Stepper, or Unavailable Button */}
                                                     <div className="shrink-0">
-                                                        {qty === 0 ? (
+                                                        {!isAvailable ? (
+                                                            <div
+                                                                aria-disabled="true"
+                                                                className="px-3.5 py-1.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-400 font-black text-xs uppercase tracking-wider select-none cursor-not-allowed shadow-none"
+                                                                title="This dish is currently unavailable"
+                                                            >
+                                                                Unavailable
+                                                            </div>
+                                                        ) : qty === 0 ? (
                                                             <button
                                                                 type="button"
                                                                 onClick={() => addToCart(item)}
