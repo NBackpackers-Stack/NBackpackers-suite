@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
-import { menuItems } from "@/utils/menu";
-import { useCafeCart, MenuItemType } from "@/hooks/cafe/useCafeCart";
+import { useCafeCart } from "@/hooks/cafe/useCafeCart";
+import { useGetMenu } from "@/hooks/cafe/useGetMenu";
 
 // Helper to determine if an item is non-veg
 const isNonVegItem = (itemName: string): boolean => {
@@ -34,38 +34,18 @@ export default function CafeMenuView() {
     const router = useRouter();
     const { addToCart, decrementItem, getItemQuantity, totalQuantity, totalPrice } = useCafeCart();
 
-    const [searchQuery, setSearchQuery] = useState<string>("");
-    const [selectedCategory, setSelectedCategory] = useState<string>("All");
-
-    // Extract unique categories
-    const categories = useMemo(() => {
-        const unique = Array.from(new Set(menuItems.map((m) => m.category)));
-        return ["All", ...unique];
-    }, []);
-
-    // Filtered menu items
-    const filteredItems = useMemo(() => {
-        return menuItems.filter((item) => {
-            const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
-            const matchesSearch =
-                searchQuery.trim() === "" ||
-                item.item.toLowerCase().includes(searchQuery.toLowerCase().trim()) ||
-                item.category.toLowerCase().includes(searchQuery.toLowerCase().trim());
-            return matchesCategory && matchesSearch;
-        });
-    }, [searchQuery, selectedCategory]);
-
-    // Group items by category for clean section display
-    const groupedItems = useMemo(() => {
-        const groups: { [key: string]: MenuItemType[] } = {};
-        filteredItems.forEach((item) => {
-            if (!groups[item.category]) {
-                groups[item.category] = [];
-            }
-            groups[item.category].push(item);
-        });
-        return groups;
-    }, [filteredItems]);
+    // Consume the dedicated custom hook for menu fetching and state orchestration
+    const {
+        filteredItems,
+        groupedItems,
+        categories,
+        selectedCategory,
+        setSelectedCategory,
+        searchQuery,
+        setSearchQuery,
+        isLoading,
+        isFromDatabase,
+    } = useGetMenu();
 
     return (
         <div className="w-full max-w-full overflow-x-hidden min-h-screen bg-gradient-to-b from-orange-50/40 via-amber-50/20 to-slate-50 font-sans selection:bg-orange-200 pt-3 sm:pt-6 pb-28 px-3.5 sm:px-4">
@@ -78,13 +58,20 @@ export default function CafeMenuView() {
                         onClick={() => router.push("/cafe")}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-orange-50 border border-slate-200 text-slate-700 font-bold text-xs shadow-2xs active:scale-95 transition-all cursor-pointer"
                     >
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3.5 h-3.5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                         </svg>
                         <span>Dashboard</span>
                     </button>
 
                     <div className="flex items-center gap-2">
+                        {isFromDatabase && (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                DB Live
+                            </span>
+                        )}
+
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-xs">
                             <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
                             IDST Branch
@@ -138,21 +125,21 @@ export default function CafeMenuView() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search dishes (e.g. cold coffee, dosa, burger)..."
-                        className="w-full bg-white border border-slate-200 rounded-2xl pl-10 pr-9 py-2.5 text-base sm:text-sm font-semibold text-slate-800 placeholder-slate-400 shadow-2xs outline-none focus:border-orange-500 focus:ring-3 focus:ring-orange-100 transition-all"
+                        className="w-full bg-white border border-slate-200/90 rounded-2xl pl-10 pr-9 py-2.5 text-base sm:text-sm font-medium text-slate-800 placeholder-slate-400 shadow-2xs outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-all"
                     />
                     {searchQuery && (
                         <button
                             type="button"
                             onClick={() => setSearchQuery("")}
-                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 font-bold text-xs"
+                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 text-xs font-bold"
                         >
                             ✕
                         </button>
                     )}
                 </div>
 
-                {/* Multi-Colored Horizontal Category Chips */}
-                <div className="mb-4 flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none">
+                {/* Multi-Colored Category Filter Horizontal Scroll */}
+                <div className="mb-4 -mx-3.5 px-3.5 sm:mx-0 sm:px-0 overflow-x-auto no-scrollbar scroll-smooth flex items-center gap-1.5 pb-1">
                     {categories.map((cat) => {
                         const isSelected = selectedCategory === cat;
                         const meta = categoryMeta[cat] || { icon: "🍽️", bg: "bg-slate-50", text: "text-slate-700", border: "border-slate-200" };
@@ -162,76 +149,92 @@ export default function CafeMenuView() {
                                 key={cat}
                                 type="button"
                                 onClick={() => setSelectedCategory(cat)}
-                                className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                                className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-black transition-all cursor-pointer active:scale-95 ${
                                     isSelected
-                                        ? "bg-slate-900 text-white shadow-md shadow-slate-900/20 scale-102"
-                                        : `${meta.bg} ${meta.text} hover:opacity-90 border ${meta.border} shadow-2xs`
+                                        ? "bg-slate-900 text-white shadow-md shadow-slate-900/20 scale-[1.02]"
+                                        : `${meta.bg} ${meta.text} border ${meta.border} hover:opacity-90 shadow-2xs`
                                 }`}
                             >
-                                <span>{meta.icon}</span>
+                                <span className="text-xs">{meta.icon}</span>
                                 <span>{cat}</span>
                             </button>
                         );
                     })}
                 </div>
 
-                {/* Menu Items List - Grouped by Category */}
-                {Object.keys(groupedItems).length === 0 ? (
-                    <div className="bg-white rounded-3xl p-8 text-center border border-slate-200 shadow-2xs">
-                        <div className="w-12 h-12 mx-auto rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-xl mb-2">
-                            🍽️
-                        </div>
-                        <h3 className="text-sm font-bold text-slate-800 mb-1">No matching food found</h3>
-                        <p className="text-xs text-slate-400 mb-3">Try checking spelling or reset filters.</p>
+                {/* Loading State Skeleton */}
+                {isLoading && filteredItems.length === 0 && (
+                    <div className="py-12 text-center space-y-3">
+                        <div className="w-8 h-8 mx-auto border-3 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                        <p className="text-xs font-bold text-slate-400">Loading Cafe Menu...</p>
+                    </div>
+                )}
+
+                {/* Empty State */}
+                {!isLoading && filteredItems.length === 0 && (
+                    <div className="bg-white rounded-3xl p-8 text-center border border-slate-200/80 shadow-2xs my-4">
+                        <div className="text-3xl mb-2">🔍</div>
+                        <h3 className="text-sm font-bold text-slate-800 mb-1">No items found</h3>
+                        <p className="text-xs text-slate-400 max-w-xs mx-auto mb-3">
+                            No dishes match "{searchQuery}" in "{selectedCategory}". Try clearing your filters.
+                        </p>
                         <button
                             type="button"
                             onClick={() => {
                                 setSearchQuery("");
                                 setSelectedCategory("All");
                             }}
-                            className="px-4 py-2 rounded-xl bg-orange-600 text-white text-xs font-bold shadow-xs cursor-pointer"
+                            className="px-4 py-1.5 rounded-xl bg-orange-500 text-white font-bold text-xs"
                         >
                             Reset Filters
                         </button>
                     </div>
-                ) : (
+                )}
+
+                {/* Grouped Menu Item Cards */}
+                {Object.keys(groupedItems).length > 0 && (
                     <div className="space-y-4">
-                        {Object.entries(groupedItems).map(([categoryName, itemsList]) => {
-                            const meta = categoryMeta[categoryName] || { icon: "🍽️", bg: "bg-slate-50", text: "text-slate-800", border: "border-slate-200" };
+                        {Object.entries(groupedItems).map(([category, items]) => {
+                            const meta = categoryMeta[category] || { icon: "🍽️", bg: "bg-slate-50", text: "text-slate-800", border: "border-slate-200" };
 
                             return (
-                                <div key={categoryName} className="space-y-2">
-                                    {/* Category Section Header */}
-                                    <div className="flex items-center justify-between px-1">
-                                        <h2 className="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
-                                            <span className="text-sm">{meta.icon}</span>
-                                            <span>{categoryName}</span>
-                                        </h2>
-                                        <span className="text-[10px] font-bold text-slate-400">
-                                            {itemsList.length} {itemsList.length === 1 ? "dish" : "dishes"}
+                                <div
+                                    key={category}
+                                    className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-2xs"
+                                >
+                                    {/* Section Header */}
+                                    <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-100">
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-lg">{meta.icon}</span>
+                                            <h2 className="text-sm sm:text-base font-black text-slate-900 tracking-tight">
+                                                {category}
+                                            </h2>
+                                        </div>
+                                        <span className="text-[11px] font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-100">
+                                            {items.length} {items.length === 1 ? "dish" : "dishes"}
                                         </span>
                                     </div>
 
-                                    {/* Items Cards */}
-                                    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs divide-y divide-slate-100 overflow-hidden">
-                                        {itemsList.map((item, idx) => {
-                                            const qty = getItemQuantity(item.item);
+                                    {/* Items List in this Category */}
+                                    <div className="divide-y divide-slate-100">
+                                        {items.map((item) => {
                                             const isNonVeg = isNonVegItem(item.item);
+                                            const qty = getItemQuantity(item.item);
 
                                             return (
                                                 <div
-                                                    key={idx}
-                                                    className="p-3.5 sm:p-4 flex items-center justify-between gap-3 hover:bg-slate-50/80 transition-colors"
+                                                    key={item.item}
+                                                    className="py-3 flex items-center justify-between gap-3 group"
                                                 >
-                                                    {/* Left: Veg/Non-veg icon, Item name, Category pill, Price */}
+                                                    {/* Item Info */}
                                                     <div className="min-w-0 flex-1">
                                                         <div className="flex items-center gap-1.5 mb-1">
-                                                            {/* Veg / Non-veg dot indicator */}
+                                                            {/* Veg / Non-Veg Indicator */}
                                                             <span
-                                                                className={`w-3.5 h-3.5 rounded-xs border flex items-center justify-center ${
+                                                                className={`w-3.5 h-3.5 rounded-xs border flex items-center justify-center shrink-0 ${
                                                                     isNonVeg ? "border-rose-600" : "border-emerald-600"
                                                                 }`}
-                                                                title={isNonVeg ? "Non-Veg" : "Veg"}
+                                                                title={isNonVeg ? "Non-Vegetarian" : "Vegetarian"}
                                                             >
                                                                 <span
                                                                     className={`w-1.5 h-1.5 rounded-full ${
@@ -239,40 +242,37 @@ export default function CafeMenuView() {
                                                                     }`}
                                                                 ></span>
                                                             </span>
-                                                            <span className={`text-[9px] font-extrabold uppercase tracking-wider px-1.5 py-0.2 rounded ${meta.bg} ${meta.text}`}>
-                                                                {item.category}
-                                                            </span>
+
+                                                            <h3 className="text-xs sm:text-sm font-black text-slate-800 group-hover:text-orange-600 transition-colors truncate">
+                                                                {item.item}
+                                                            </h3>
                                                         </div>
 
-                                                        <h3 className="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">
-                                                            {item.item}
-                                                        </h3>
-
-                                                        <div className="flex items-center gap-2 mt-1">
-                                                            <span className="text-sm font-black text-slate-900">
+                                                        {/* Price Tag */}
+                                                        <div className="flex items-center gap-1.5">
+                                                            <span className="text-xs sm:text-sm font-black text-slate-900">
                                                                 {item.price}
                                                             </span>
-                                                            {item.price.toUpperCase() === "M.R.P." && (
-                                                                <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200">
-                                                                    Retail MRP
+                                                            {item.price.toUpperCase().includes("M.R.P") && (
+                                                                <span className="text-[10px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-1 rounded">
+                                                                    At MRP
                                                                 </span>
                                                             )}
                                                         </div>
                                                     </div>
 
-                                                    {/* Right: Zomato-Style ADD Button / Stepper */}
+                                                    {/* Zomato-Style ADD Button or Stepper */}
                                                     <div className="shrink-0">
                                                         {qty === 0 ? (
                                                             <button
                                                                 type="button"
                                                                 onClick={() => addToCart(item)}
-                                                                className="px-4 sm:px-5 py-1.5 rounded-xl bg-white hover:bg-orange-50 active:bg-orange-100 border-2 border-orange-500 text-orange-600 font-black text-xs sm:text-sm uppercase tracking-wider shadow-2xs active:scale-95 transition-all cursor-pointer flex items-center gap-1"
+                                                                className="px-4 py-1.5 rounded-xl border-2 border-orange-500 bg-white hover:bg-orange-50 text-orange-600 hover:text-orange-700 font-black text-xs uppercase tracking-wider shadow-2xs active:scale-95 transition-all cursor-pointer"
                                                             >
-                                                                <span>ADD</span>
-                                                                <span className="text-base leading-none font-bold">+</span>
+                                                                ADD +
                                                             </button>
                                                         ) : (
-                                                            <div className="flex items-center bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl overflow-hidden shadow-xs border border-orange-600">
+                                                            <div className="flex items-center bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl shadow-xs overflow-hidden">
                                                                 <button
                                                                     type="button"
                                                                     onClick={() => decrementItem(item.item)}
@@ -305,7 +305,7 @@ export default function CafeMenuView() {
 
             </div>
 
-            {/* ── ZOMATO-STYLE FLOATING BOTTOM CART BAR (Vibrant & High-Contrast) ── */}
+            {/* Zomato-Style Floating Bottom Cart Bar */}
             {totalQuantity > 0 && (
                 <div className="fixed bottom-3 inset-x-3 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-96 z-50 animate-in slide-in-from-bottom-5 duration-300">
                     <button

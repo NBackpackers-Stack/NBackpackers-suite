@@ -13,5 +13,7 @@ export const API = {
     recciSave: "/api/recci/save",
     recciGetAll: "/api/recci/getAll",
     recciGetById: "/api/recci/getById",
-    getAllTrips: "/api/getAllTrips"
+    getAllTrips: "/api/getAllTrips",
+    createMenu: "/api/cafe/createMenu",
+    getMenu: "/api/cafe/getMenu"
 }
