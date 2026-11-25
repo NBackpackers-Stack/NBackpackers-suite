@@ -29,9 +29,11 @@ export function useGetMenu(cafeName = "IDST Backpackers Cafe"): UseGetMenuReturn
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
-    const fetchMenu = useCallback(async () => {
+    const fetchMenu = useCallback(async (isSilent = false) => {
         try {
-            setIsLoading(true);
+            if (!isSilent) {
+                setIsLoading(true);
+            }
             setErrorMessage(null);
 
             const res = await getMenu(cafeName);
@@ -48,22 +50,73 @@ export function useGetMenu(cafeName = "IDST Backpackers Cafe"): UseGetMenuReturn
                 setMenuItems(dbItems);
                 setIsFromDatabase(true);
             } else {
-                // Graceful fallback to static menu if no items found in DB
+                // Graceful fallback to static menu if no items returned
                 setMenuItems(defaultMenuItems);
                 setIsFromDatabase(false);
             }
         } catch (err: any) {
-            console.warn("Could not fetch menu from database, using default menu:", err?.message || err);
-            setMenuItems(defaultMenuItems);
-            setIsFromDatabase(false);
+            console.warn("Could not fetch menu from database, keeping current menu:", err?.message || err);
+            // Don't wipe active dishes on silent background polling errors
+            setMenuItems((prev) => (prev && prev.length > 0 ? prev : defaultMenuItems));
             setErrorMessage(err?.message || "Using local menu");
         } finally {
-            setIsLoading(false);
+            if (!isSilent) {
+                setIsLoading(false);
+            }
         }
     }, [cafeName]);
 
     useEffect(() => {
-        fetchMenu();
+        // Initial fetch on component mount (with visible loading state)
+        fetchMenu(false);
+
+        // 1. Background interval polling every 2.5 seconds (silent, zero UI flicker)
+        const intervalId = setInterval(() => {
+            fetchMenu(true);
+        }, 2500);
+
+        // 2. Immediate refetch on window focus or tab visibility change
+        const handleVisibilityOrFocus = () => {
+            if (document.visibilityState === "visible") {
+                fetchMenu(true);
+            }
+        };
+
+        // 3. Immediate cross-tab sync when editMenu saves changes via localStorage
+        const handleStorageChange = (e: StorageEvent) => {
+            if (e.key === "cafe_menu_updated_at") {
+                fetchMenu(true);
+            }
+        };
+
+        // 4. Instant cross-tab sync via BroadcastChannel (0ms delay)
+        let channel: BroadcastChannel | null = null;
+        try {
+            if (typeof window !== "undefined" && "BroadcastChannel" in window) {
+                channel = new BroadcastChannel("cafe_menu_channel");
+                channel.onmessage = (event) => {
+                    if (event.data?.type === "MENU_UPDATED") {
+                        fetchMenu(true);
+                    }
+                };
+            }
+        } catch {
+            // BroadcastChannel fallback silently if unsupported
+        }
+
+        window.addEventListener("focus", handleVisibilityOrFocus);
+        document.addEventListener("visibilitychange", handleVisibilityOrFocus);
+        window.addEventListener("storage", handleStorageChange);
+
+        return () => {
+            clearInterval(intervalId);
+            window.removeEventListener("focus", handleVisibilityOrFocus);
+            document.removeEventListener("visibilitychange", handleVisibilityOrFocus);
+            window.removeEventListener("storage", handleStorageChange);
+            if (channel) {
+                channel.close();
+            }
+        };
     }, [fetchMenu]);
 
     // Extract unique categories

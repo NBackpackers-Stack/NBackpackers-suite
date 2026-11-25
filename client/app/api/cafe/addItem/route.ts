@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/utils/db";
 import MenuModel from "@/models/menu.model";
+import { menuItems as defaultMenuItems } from "@/utils/menu";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function POST(req: NextRequest) {
     try {
@@ -26,10 +30,17 @@ export async function POST(req: NextRequest) {
         let menuDoc = await MenuModel.findOne({ cafeName });
 
         if (!menuDoc) {
-            // If no menu exists, create the initial menu with this item
+            const initialItems = defaultMenuItems.map((it) => ({
+                category: it.category,
+                item: it.item,
+                price: it.price,
+                isAvailable: true,
+            }));
+
             menuDoc = await MenuModel.create({
                 cafeName,
                 items: [
+                    ...initialItems,
                     {
                         category: trimmedCategory,
                         item: trimmedItem,
@@ -45,11 +56,17 @@ export async function POST(req: NextRequest) {
                     message: `Item "${trimmedItem}" added successfully.`,
                     data: menuDoc,
                 },
-                { status: 201 }
+                {
+                    status: 201,
+                    headers: {
+                        "Cache-Control": "no-store, no-cache, must-revalidate",
+                        Pragma: "no-cache",
+                        Expires: "0",
+                    },
+                }
             );
         }
 
-        // Check if item with exact same name already exists in menu
         const existingItemIndex = menuDoc.items.findIndex(
             (i: any) => i.item.toLowerCase() === trimmedItem.toLowerCase()
         );
@@ -71,6 +88,7 @@ export async function POST(req: NextRequest) {
             isAvailable: Boolean(isAvailable),
         });
 
+        menuDoc.markModified("items");
         await menuDoc.save();
 
         return NextResponse.json(
@@ -79,7 +97,14 @@ export async function POST(req: NextRequest) {
                 message: `Item "${trimmedItem}" added to menu successfully.`,
                 data: menuDoc,
             },
-            { status: 200 }
+            {
+                status: 200,
+                headers: {
+                    "Cache-Control": "no-store, no-cache, must-revalidate",
+                    Pragma: "no-cache",
+                    Expires: "0",
+                },
+            }
         );
     } catch (error: any) {
         console.error("Error adding menu item:", error);

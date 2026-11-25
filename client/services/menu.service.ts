@@ -62,12 +62,20 @@ export const createMenu = async (
 };
 
 /**
- * Fetches the latest menu for the cafe
+ * Fetches the latest menu for the cafe with cache-busting timestamp and no-cache headers
  */
 export const getMenu = async (cafeName?: string): Promise<MenuApiResponse> => {
     try {
         const response = await axios.get<MenuApiResponse>(API.getMenu, {
-            params: cafeName ? { cafeName } : undefined,
+            params: {
+                ...(cafeName ? { cafeName } : {}),
+                _t: Date.now(),
+            },
+            headers: {
+                "Cache-Control": "no-cache, no-store, must-revalidate",
+                Pragma: "no-cache",
+                Expires: "0",
+            },
         });
         return response.data;
     } catch (error: any) {

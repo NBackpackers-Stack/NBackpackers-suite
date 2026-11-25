@@ -52,6 +52,22 @@ export interface UseEditMenuReturn {
     handleDeleteSubmit: () => Promise<void>;
 }
 
+// Helper to notify other tabs/views across the application immediately
+const broadcastMenuUpdate = () => {
+    if (typeof window !== "undefined") {
+        try {
+            localStorage.setItem("cafe_menu_updated_at", Date.now().toString());
+            if ("BroadcastChannel" in window) {
+                const bc = new BroadcastChannel("cafe_menu_channel");
+                bc.postMessage({ type: "MENU_UPDATED", timestamp: Date.now() });
+                bc.close();
+            }
+        } catch {
+            // Ignore broadcast / localStorage errors
+        }
+    }
+};
+
 export function useEditMenu(cafeName = "IDST Backpackers Cafe"): UseEditMenuReturn {
     const [menuItems, setMenuItems] = useState<MenuItemPayload[]>(defaultMenuItems);
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -178,6 +194,10 @@ export function useEditMenu(cafeName = "IDST Backpackers Cafe"): UseEditMenuRetu
 
             setSuccessMessage(res?.message || `"${addForm.item}" added to menu successfully.`);
             setIsAddModalOpen(false);
+
+            // Notify all other pages and tabs immediately
+            broadcastMenuUpdate();
+
             await fetchMenu();
         } catch (err: any) {
             setErrorMessage(err?.message || "Failed to add item to menu.");
@@ -236,6 +256,10 @@ export function useEditMenu(cafeName = "IDST Backpackers Cafe"): UseEditMenuRetu
             setSuccessMessage(res?.message || `"${editForm.item}" updated successfully.`);
             setIsEditModalOpen(false);
             setEditingItem(null);
+
+            // Notify all other pages and tabs immediately
+            broadcastMenuUpdate();
+
             await fetchMenu();
         } catch (err: any) {
             setErrorMessage(err?.message || "Failed to update item.");
@@ -274,6 +298,10 @@ export function useEditMenu(cafeName = "IDST Backpackers Cafe"): UseEditMenuRetu
             setSuccessMessage(res?.message || `"${deletingItem.item}" removed from menu.`);
             setIsDeleteModalOpen(false);
             setDeletingItem(null);
+
+            // Notify all other pages and tabs immediately
+            broadcastMenuUpdate();
+
             await fetchMenu();
         } catch (err: any) {
             setErrorMessage(err?.message || "Failed to delete item.");

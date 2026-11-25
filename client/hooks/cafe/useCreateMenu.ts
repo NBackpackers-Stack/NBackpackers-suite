@@ -164,6 +164,9 @@ export function useCreateMenu(): UseCreateMenuReturn {
             setSuccessMessage(
                 res?.message || `Successfully created menu with ${parsedItems.length} items in database!`
             );
+            if (typeof window !== "undefined") {
+                localStorage.setItem("cafe_menu_updated_at", Date.now().toString());
+            }
         } catch (err: any) {
             console.error("Failed to save menu:", err);
             setErrorMessage(err?.message || "Failed to save menu to database. Please check your connection.");

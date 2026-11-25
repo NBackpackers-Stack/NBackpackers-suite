@@ -209,7 +209,10 @@ export default function CafeMenuView() {
                                                 {category}
                                             </h2>
                                         </div>
-                                        <span className="text-[11px] font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-100">
+                                        <span
+                                            suppressHydrationWarning
+                                            className="text-[11px] font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-100"
+                                        >
                                             {`${items.length} ${items.length === 1 ? "dish" : "dishes"}`}
                                         </span>
                                     </div>
