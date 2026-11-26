@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import { useCafeCart } from "@/hooks/cafe/useCafeCart";
+import { useCreateOrder } from "@/hooks/cafe/useCreateOrder";
 
 // Helper to determine if an item is non-veg
 const isNonVegItem = (itemName: string): boolean => {
@@ -47,81 +48,15 @@ export default function CafeCartView() {
         setNotes,
     } = useCafeCart();
 
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-    const [orderSuccess, setOrderSuccess] = useState<boolean>(false);
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-    const isFormValid =
-        customerName.trim().length > 0 &&
-        customerNumber.trim().length >= 10 &&
-        cartItems.length > 0 &&
-        cartItems.every((i) => i.price > 0);
-
-    const handlePlaceOrder = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setErrorMessage(null);
-
-        if (!customerName.trim()) {
-            setErrorMessage("Please enter customer name.");
-            return;
-        }
-
-        if (customerNumber.trim().length < 10) {
-            setErrorMessage("Please enter a valid 10-digit mobile number.");
-            return;
-        }
-
-        if (cartItems.length === 0) {
-            setErrorMessage("Your cart is empty. Please add items from menu.");
-            return;
-        }
-
-        const unpricedItem = cartItems.find((i) => i.price <= 0);
-        if (unpricedItem) {
-            setErrorMessage(`Please enter the price for "${unpricedItem.name}".`);
-            return;
-        }
-
-        try {
-            setIsSubmitting(true);
-            const orderPayload = {
-                customerName: customerName.trim(),
-                customerNumber: customerNumber.trim(),
-                notes: notes.trim(),
-                items: cartItems.map((i) => ({
-                    itemName: i.name,
-                    category: i.category,
-                    price: i.price,
-                    quantity: i.quantity,
-                    subtotal: i.subtotal,
-                })),
-                totalPrice,
-                totalUnits: totalQuantity,
-                createdAt: new Date().toISOString(),
-            };
-
-            console.log("Cafe Order Generated:", orderPayload);
-
-            // Latency simulation
-            await new Promise((resolve) => setTimeout(resolve, 600));
-
-            setOrderSuccess(true);
-        } catch (err: any) {
-            console.error("Order error:", err);
-            setErrorMessage(err?.message || "Failed to place order. Try again.");
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    const handleNewOrder = () => {
-        clearCart();
-        setCustomerName("");
-        setCustomerNumber("");
-        setNotes("");
-        setOrderSuccess(false);
-        router.push("/cafe/menu");
-    };
+    const {
+        isSubmitting,
+        orderSuccess,
+        errorMessage,
+        clearError,
+        isFormValid,
+        handlePlaceOrder,
+        handleNewOrder,
+    } = useCreateOrder();
 
     return (
         <div className="w-full max-w-full overflow-x-hidden min-h-screen bg-gradient-to-b from-orange-50/40 via-amber-50/20 to-slate-50 font-sans selection:bg-orange-200 pt-3 sm:pt-6 pb-36 px-3.5 sm:px-4">
@@ -183,7 +118,7 @@ export default function CafeCartView() {
                             <span className="w-5 h-5 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center shrink-0 font-black text-xs">!</span>
                             <span>{errorMessage}</span>
                         </div>
-                        <button type="button" onClick={() => setErrorMessage(null)} className="text-rose-400 hover:text-rose-700 font-bold px-1.5 py-0.5 text-sm">✕</button>
+                        <button type="button" onClick={clearError} className="text-rose-400 hover:text-rose-700 font-bold px-1.5 py-0.5 text-sm">✕</button>
                     </div>
                 )}
 

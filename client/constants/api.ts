@@ -18,5 +18,6 @@ export const API = {
     getMenu: "/api/cafe/getMenu",
     addMenuItem: "/api/cafe/addItem",
     editMenuItem: "/api/cafe/editItem",
-    deleteMenuItem: "/api/cafe/deleteItem"
+    deleteMenuItem: "/api/cafe/deleteItem",
+    createOrder: "/api/cafe/createOrder"
 }
