@@ -52,7 +52,7 @@ export default function CafeDashboard() {
         </div>
 
         {/* Dashboard Operational Tiles */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           
           {/* Tile 1: Create Menu (Opens Modal Box to paste array of objects) */}
           <div
@@ -117,6 +117,41 @@ export default function CafeDashboard() {
             <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-black text-amber-700 group-hover:text-amber-800">
               <span className="flex items-center gap-1.5">
                 <span>✏️</span> Open Menu Editor
+              </span>
+              <svg className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </Link>
+
+          {/* Tile 3: Order Panel (View Customer Orders 10 at a Time) */}
+          <Link
+            href="/cafe/orderPanel"
+            className="group relative overflow-hidden bg-white rounded-3xl p-6 sm:p-7 shadow-sm border border-slate-200/90 hover:border-emerald-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 group-hover:bg-gradient-to-tr group-hover:from-emerald-500 group-hover:to-teal-500 group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-inner">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                  </svg>
+                </div>
+                <span className="inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100/70 border border-emerald-200 px-2.5 py-1 rounded-full">
+                  Live Orders
+                </span>
+              </div>
+
+              <h2 className="text-xl font-black text-slate-900 group-hover:text-emerald-700 transition-colors mb-2">
+                Order Panel
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 font-medium leading-relaxed">
+                Track all incoming and past customer orders 10 at a time, filter by status, and load older orders on demand.
+              </p>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-black text-emerald-700 group-hover:text-emerald-800">
+              <span className="flex items-center gap-1.5">
+                <span>🧾</span> Open Order Panel
               </span>
               <svg className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
